@@ -5,7 +5,7 @@ public class Accounts {
     public static String checkCustomerAccount(String customerEmail, String customerPassword) {
 
         try {
-            BufferedReader bufferedReader = new BufferedReader(new FileReader("CustomerAccountsList.txt"));
+            BufferedReader bufferedReader = new BufferedReader(new FileReader("Database/Lists/CustomerAccountsList.txt"));
 
             String line = "";
 
@@ -35,8 +35,10 @@ public class Accounts {
 
         } catch (FileNotFoundException e) {
             System.out.println("CustomerAccountsList.txt does not exist!");
+            e.printStackTrace();
         } catch (IOException e) {
             System.out.println("Can't read this line!");
+            e.printStackTrace();
         }
 
         return "Could not find account";
@@ -50,7 +52,7 @@ public class Accounts {
 
     public static String checkSellerAccount(String sellerEmail, String sellerPassword) {
         try {
-            BufferedReader bufferedReader = new BufferedReader(new FileReader("SellerAccountsList.txt"));
+            BufferedReader bufferedReader = new BufferedReader(new FileReader("Database/Lists/SellerAccountsList.txt"));
 
             String line = "";
 
@@ -79,6 +81,7 @@ public class Accounts {
             }
 
         } catch (FileNotFoundException e) {
+            e.printStackTrace();
             System.out.println("SellerAccountsList.txt does not exist!");
         } catch (IOException e) {
             System.out.println("Can't read this line!");
@@ -98,7 +101,7 @@ public class Accounts {
         }
 
         try {
-            PrintWriter printWriter = new PrintWriter(new BufferedWriter(new FileWriter("CustomerAccountsList.txt", true)));
+            PrintWriter printWriter = new PrintWriter(new BufferedWriter(new FileWriter("Database/Lists/CustomerAccountsList.txt", true)));
 
             printWriter.println(customerEmail);
             printWriter.println(customerPassword);
@@ -110,7 +113,7 @@ public class Accounts {
             System.out.println("CustomerAccountsList.txt does not exist!");
         }
 
-        new File("Accounts/CustomerAccounts/" + customerEmail).mkdirs();
+        new File("Database/Accounts/CustomerAccounts/" + customerEmail).mkdirs();
 //        File messagesFile = new File("CustomerAccounts/" + customerEmail +
 //                "/messages.txt")
     }
@@ -122,7 +125,7 @@ public class Accounts {
         }
 
         try {
-            PrintWriter printWriter = new PrintWriter(new BufferedWriter(new FileWriter("SellerAccountsList.txt", true)));
+            PrintWriter printWriter = new PrintWriter(new BufferedWriter(new FileWriter("Database/Lists/SellerAccountsList.txt", true)));
 
             printWriter.println(sellerEmail);
             printWriter.println(sellerPassword);
@@ -131,10 +134,13 @@ public class Accounts {
             printWriter.close();
 
         } catch (IOException e) {
+            e.printStackTrace();
             System.out.println("SellerAccountsList.txt does not exist!");
         }
 
-        new File("Accounts/SellerAccounts/" + sellerEmail).mkdirs();
+        new File("Database/Accounts/SellerAccounts/" + sellerEmail).mkdirs();
+        File storesFile = new File("Database/Accounts/SellerAccounts/" + sellerEmail +
+                "/Stores.txt");
     }
 
 }
