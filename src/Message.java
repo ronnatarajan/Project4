@@ -18,7 +18,9 @@ public class Message {
         if (sender.isSeller() == sender.isSeller()) {
             if (sender.isSeller()) {
                 throw new InvalidMessageException("Seller cannot message another seller");
-            } else {
+            } else if (recipient.hasBlocked(sender)) {
+                throw new InvalidMessageException("You have been blocked");
+            }else {
                 throw new InvalidMessageException("Buyer cannot message another buyer");
             }
         }
