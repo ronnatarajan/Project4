@@ -76,7 +76,7 @@ public class Accounts {
     }
 
     public static void addSellerAccount(String sellerEmail, String sellerPassword) {
-        if (checkAccount(sellerEmail, sellerPassword,"Database/Lists/CustomerAccountsList.txt").equals("Email or password is incorrect")) {
+        if (checkAccount(sellerEmail, sellerPassword,"Database/Lists/SellerAccountsList.txt").equals("Email or password is incorrect")) {
             System.out.println("Seller account already exists!");
             return;
         }
