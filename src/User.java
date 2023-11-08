@@ -47,6 +47,12 @@ public class User {
     }
 
     /**
+     * validate password
+     * @param password String
+     * @return true if correct password was entered
+     */
+    public boolean correctPassword(String password) {return this.password.equals(password);}
+    /**
      * getter for seller
      *
      * @return boolean

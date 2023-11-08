@@ -1,81 +1,99 @@
+package src;
+
 import java.io.*;
+import java.util.Scanner;
 
 public class SendMessages {
 
-    public static void customerReceivesMessages(String customerEmail, String sellerEmail, String newMessage) {
-        String fileName = "Accounts/CustomerAccounts/" + customerEmail + "/" +
-                sellerEmail + ".txt";
+    public static void messageInterface(String storeName) {
+        Scanner scan = new Scanner(System.in);
 
-        File messageFile = new File(fileName);
+        System.out.println("Please type your message to " + storeName + "below and hit enter to send.");
+        System.out.println("\n");
 
-        if (messageFile.exists()) {
-            appendMessage(fileName, newMessage);
-        } else {
-            try {
-                messageFile.createNewFile();
-            } catch (IOException e) {
-                throw new RuntimeException(e);
+
+    }
+
+
+    public static void printCustomerMessages(String customerEmail, String sellerEmail) {
+        try {
+            BufferedReader bufferedReader = new BufferedReader(new FileReader("Database/Accounts/CustomerAccounts/" + customerEmail + "/" + sellerEmail + ".txt"));
+
+            String line = "";
+
+            while ((line = bufferedReader.readLine()) != null) {
+                System.out.println(line);
             }
-        }
-
-
-        // This is to append the message to the seller's message history file as well
-        String sellerFileName = "Accounts/SellerAccounts/" + sellerEmail + "/" +
-                customerEmail + ".txt";
-
-        File sellerMessageFile = new File(sellerFileName);
-
-        if (sellerMessageFile.exists()) {
-            appendMessage(sellerFileName, newMessage);
-        } else {
-            try {
-                sellerMessageFile.createNewFile();
-            } catch (IOException e) {
-                throw new RuntimeException(e);
-            }
+        } catch (FileNotFoundException e) {
+            throw new RuntimeException(e);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
         }
     }
 
-    public static void sellerReceivesMessages(String sellerEmail, String customerEmail, String newMessage) {
-        String fileName = "Accounts/CustomerAccounts/" + sellerEmail + "/" +
+    public static void printSellerMessages(String sellerEmail, String customerEmail) {
+        try {
+            BufferedReader bufferedReader = new BufferedReader(new FileReader("Database/Accounts/CustomerAccounts/" + sellerEmail + "/" + customerEmail + ".txt"));
+
+            String line = "";
+
+            while ((line = bufferedReader.readLine()) != null) {
+                System.out.println(line);
+            }
+        } catch (FileNotFoundException e) {
+            throw new RuntimeException(e);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+
+    public static void sellerSendsMessage(String customerEmail, String sellerEmail, String newMessage, String storeName) {
+        String fileName = "Database/Accounts/CustomerAccounts/" + customerEmail + "/" +
+                sellerEmail + ".txt";
+
+
+        appendMessage(fileName, newMessage, storeName);
+
+
+
+
+        // This is to append the message to the seller's message history file as well
+        String sellerFileName = "Database/Accounts/SellerAccounts/" + sellerEmail + "/" +
                 customerEmail + ".txt";
+
+        appendMessage(sellerFileName, newMessage, storeName);
+    }
+
+    public static void customerSendsMessage(String sellerEmail, String customerEmail, String newMessage) {
+        String fileName = "Database/Accounts/SellerAccounts/" + sellerEmail + "/" +
+                customerEmail + ".txt";
+
+
+        int index = customerEmail.indexOf('@');
+        String customerName = customerEmail.substring(0, index);
 
         File messageFile = new File(fileName);
 
-        if (messageFile.exists()) {
-            appendMessage(fileName, newMessage);
-        } else {
-            try {
-                messageFile.createNewFile();
-            } catch (IOException e) {
-                throw new RuntimeException(e);
-            }
-        }
+        appendMessage(fileName, newMessage, customerName);
 
 
         // This is to append the message to the customer's message history file as well
-        String customerFileName = "Accounts/SellerAccounts/" + customerEmail + "/" +
+        String customerFileName = "Database/Accounts/CustomerAccounts/" + customerEmail + "/" +
                 sellerEmail + ".txt";
 
         File customerMessageFile = new File(customerFileName);
 
-        if (customerMessageFile.exists()) {
-            appendMessage(customerFileName, newMessage);
-        } else {
-            try {
-                customerMessageFile.createNewFile();
-            } catch (IOException e) {
-                throw new RuntimeException(e);
-            }
-        }
+        appendMessage(customerFileName, newMessage, customerName);
+
     }
 
 
 
-    public static void appendMessage(String fileName, String newMessage) {
+    public static void appendMessage(String fileName, String newMessage, String sender) {
         try {
             PrintWriter printWriter = new PrintWriter(new BufferedWriter(new FileWriter(fileName,true)));
-            printWriter.print(newMessage + "\n");
+            printWriter.print(sender + ": " + newMessage + "\n");
 
             printWriter.flush();
             printWriter.close();
