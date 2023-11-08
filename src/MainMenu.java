@@ -5,89 +5,77 @@ import java.util.Scanner;
 
 public class MainMenu {
     public static String welcomeMessage = "Welcome to Market Place Messaging System";
-    public static String signUpPrompt = "Would you like to sign up? (Y/N)";
-    public static String logInPrompt = "Would you like to log in? (Y/N)";
-    public static String logInBuyerOrSeller = "Are you logging in as a Buyer or a Seller? (B/S)";
-    public static String errorMessageYesOrNo = "Please enter 'Y' (yes) or 'N' (no)";
-    public static String errorMessageBuyerOrSeller = "Error, please input 'B' for Buyer or 'S' for Seller";
+    public static String emailPrompt = "Please input your email.";
+    public static String passwordPrompt = "Please input your password.";
     public static String farewellMessage = "Goodbye!";
+    public static String signUpBuyerOrSeller = "Would you like to sign up as a Buyer 'B'  or a Seller 'S'?";
+    public static String errorMessageBuyerOrSeller= "Error, please enter 'B' (Buyer) or 'S' (Seller)";
+    public static String errorValidInput = "Error, please enter a valid input (1-3)";
     public static boolean isRunning = true;
     public static boolean isWrong = false;
+    private static String ongoingMenu = "1. Login\n" +
+            "2. Sign Up\n" +
+            "3. Exit";
 
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
-        ArrayList<User> userList = new ArrayList<>();
-        ArrayList<Message> messages = new ArrayList<>();
+
 
         System.out.println(welcomeMessage);
 
         while (isRunning) {
-            System.out.println(signUpPrompt);
-            String userInput = scanner.nextLine().trim().toLowerCase();
+            System.out.println(ongoingMenu);
+            int userChoice = scanner.nextInt();
+            scanner.nextLine();
+            if (userChoice == 1) {
+                System.out.println(emailPrompt);
+                String email = scanner.nextLine();
+                System.out.println(passwordPrompt);
+                String password = scanner.nextLine();
+                Accounts.checkAccount(email, password, "Database/Lists/CustomerAccountsList.txt");
 
-            if (!userInput.equals("y") && !userInput.equals("n")) {
-                isWrong = true;
-                while (isWrong) {
-                    System.out.println(errorMessageYesOrNo);
-                    System.out.println(signUpPrompt);
-                    userInput = scanner.nextLine().trim().toLowerCase();
-                    if (userInput.equals("y") || userInput.equals("n")) {
-                        isWrong = false;
-                        break;
-                    }
-                }
-            }
+            } else if (userChoice == 2) {
+                while (isRunning) {
+                    System.out.println(signUpBuyerOrSeller);
+                    String response = scanner.nextLine().toLowerCase().trim();
 
-            if (userInput.equals("y")) {
-                // Sign-up implementation goes here
-
-            } else if (userInput.equals("n")) {
-                System.out.println(logInPrompt);
-                String logInInput = scanner.nextLine().trim().toLowerCase();
-
-                if (!logInInput.equals("y") && !logInInput.equals("n")) {
-                    isWrong = true;
-                    while (isWrong) {
-                        System.out.println(errorMessageYesOrNo);
-                        System.out.println(logInPrompt);
-                        logInInput = scanner.nextLine().trim().toLowerCase();
-                        if (logInInput.equals("y") || logInInput.equals("n")) {
-                            isWrong = false;
-                            break;
-                        }
-                    }
-                }
-
-                if (logInInput.equals("y")) {
-                    System.out.println(logInBuyerOrSeller);
-                    String userTypeInput = scanner.nextLine().trim().toLowerCase();
-
-                    if (!userTypeInput.equals("y") && !userTypeInput.equals("n")) {
+                    if (!response.equals("b") && !response.equals("s")) {
                         isWrong = true;
                         while (isWrong) {
                             System.out.println(errorMessageBuyerOrSeller);
-                            System.out.println(logInBuyerOrSeller);
-                            userTypeInput = scanner.nextLine().trim().toLowerCase();
-                            if (userTypeInput.equals("y") || userTypeInput.equals("n")) {
+                            System.out.println(signUpBuyerOrSeller);
+                            response = scanner.nextLine().toLowerCase().trim();
+                            if (response.equals("b") || response.equals("s")) {
                                 isWrong = false;
-                                break;
                             }
                         }
                     }
-
-                    if (userTypeInput.equals("b")) {
-                        // Implement buyer-specific functionality here
-
-                    } else if (userTypeInput.equals("s")) {
-                        // Implement seller-specific functionality here
-
-                    } else {
-                        System.out.println("Invalid option. Please enter 'B' or 'S' for Buyer or Seller.");
+                    System.out.println(emailPrompt);
+                    String email = scanner.nextLine();
+                    System.out.println(passwordPrompt);
+                    String password = scanner.nextLine();
+                    // add a checker for valid input
+                    if (response.equals("b")) {
+                        Accounts.addCustomerAccount(email, password);
+                        isRunning = false;
+                        // add goodbye message
                     }
-                } else if (logInInput.equals("n")) {
-                    System.out.println(farewellMessage);
-                    isRunning = false;
+                    if (response.equals("s")) {
+                        System.out.println(emailPrompt);
+                        String sellerEmail = scanner.nextLine();
+                        System.out.println(passwordPrompt);
+                        String sellerPassword = scanner.nextLine();
+                        //add in validate password
+                        Accounts.addSellerAccount(sellerEmail, sellerPassword);
+                        isRunning = false;
+                        // add goodbye message
+                    }
                 }
+            } else if (userChoice == 3) {
+                System.out.println(farewellMessage);
+                isRunning = false;
+            } else {
+                System.out.println(errorValidInput);
             }
         }
     }
