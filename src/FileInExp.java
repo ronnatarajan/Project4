@@ -9,19 +9,21 @@ public class FileInExp {
         try {
             File f = new File(path);
             File export = new File(path + "export.csv");
+            export.createNewFile();
             FileWriter writer = new FileWriter(export);
             Scanner reader = new Scanner(f);
-            int lines = 0;
-            while (reader.nextLine() != null) lines++;
+            int totLines= 0;
+            ArrayList<String> lines = new ArrayList<String>();
+            while (reader.hasNextLine()) {
+                totLines++;
+                lines.add(reader.nextLine());
+            }
             String answer;
             do {
                 reader = new Scanner(f);
-                System.out.println("Enter a message to add to export (1 - " + lines + ")");
+                System.out.println("Enter a message to add to export (1 - " + totLines + ")");
                 int messageNum = Integer.parseInt(input.nextLine());
-                for (int i = 0; i < messageNum - 1; i++) {
-                    reader.nextLine();
-                }
-                writer.write(reader.nextLine() + "\n");
+                writer.write(lines.get(messageNum - 1) + "\n");
                 System.out.println("Add more messages to export? (y/n)");
                 answer = input.nextLine().toLowerCase();
             } while(answer.equals("y"));
