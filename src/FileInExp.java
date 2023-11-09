@@ -25,7 +25,7 @@ public class FileInExp {
                 System.out.println("Add more messages to export? (y/n)");
                 answer = input.nextLine().toLowerCase();
             } while(answer.equals("y"));
-
+            writer.close();
         } catch (Exception e) {
             e.printStackTrace();
         }
