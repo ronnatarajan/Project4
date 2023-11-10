@@ -20,7 +20,6 @@ public class FileInExp {
             }
             String answer;
             do {
-                reader = new Scanner(f);
                 System.out.println("Enter a message to add to export (1 - " + totLines + ")");
                 int messageNum = Integer.parseInt(input.nextLine());
                 writer.write(lines.get(messageNum - 1) + "\n");
