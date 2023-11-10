@@ -14,19 +14,19 @@ public class Stores {
 
     public static void appendStores(String fileName, String storeName, String sellerEmail) {
 
-        // Appends to other seller's Stores.txt
-        try {
-            PrintWriter printWriter = new PrintWriter(new BufferedWriter(new FileWriter(fileName,true)));
-
-            printWriter.println(storeName);
-            printWriter.println(sellerEmail);
-
-            printWriter.flush();
-            printWriter.close();
-
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
+//        // Appends to other seller's Stores.txt
+//        try {
+//            PrintWriter printWriter = new PrintWriter(new BufferedWriter(new FileWriter(fileName,true)));
+//
+//            printWriter.println(storeName);
+//            printWriter.println(sellerEmail);
+//
+//            printWriter.flush();
+//            printWriter.close();
+//
+//        } catch (IOException e) {
+//            throw new RuntimeException(e);
+//        }
 
 
         // Appends to the StoresList.txt
