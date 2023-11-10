@@ -3,10 +3,10 @@ import java.io.*;
 
 public class EditDelete {
 
-    public static void deleteMessage(String user) {
+    public static void deleteMessage(String user, boolean isSeller) {
         try{
             Scanner input = new Scanner(System.in);
-            String path = user;
+            String path = (isSeller) ? "Database/Accounts/SellerAccounts/" + user + "/" + "Messages.txt": "Database/Accounts/CustomerAccounts/" + user + "/" + "Messages.txt";
             File f = new File(path);
             Scanner reader = new Scanner(f);
             int totLines= 0;
@@ -40,10 +40,10 @@ public class EditDelete {
         }
     }
 
-    public static void editMessage(String user) {
+    public static void editMessage(String user, boolean isSeller) {
         try {
         Scanner input = new Scanner(System.in);
-        String path = user;
+        String path = (isSeller) ? "Database/Accounts/SellerAccounts/" + user + "/" + "Messages.txt": "Database/Accounts/CustomerAccounts/" + user + "/" + "Messages.txt";
         File f = new File(path);
         Scanner reader = new Scanner(f);
         int totLines= 0;
@@ -61,7 +61,7 @@ public class EditDelete {
             String[] oldMessage = lines.get(messageNum - 1).split(",");
             String recipient = oldMessage[2];
 
-            String path2 = recipient;
+            String path2 = (isSeller) ? "Database/Accounts/CustomerAccounts/" + recipient + "/" + "Messages.txt": "Database/Accounts/SellerAccounts/" + recipient + "/" + "Messages.txt";
             File recipientMessages = new File(path2);
             Scanner reader2 = new Scanner(recipientMessages);
             ArrayList<String> lines2 = new ArrayList<String>();
