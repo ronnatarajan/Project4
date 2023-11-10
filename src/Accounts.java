@@ -51,10 +51,10 @@ public class Accounts {
 
 
 
-    public static void addCustomerAccount(String customerEmail, String customerPassword) {
+    public static String addCustomerAccount(String customerEmail, String customerPassword) {
         if (checkAccount(customerEmail, customerPassword, "Database/Lists/CustomerAccountsList.txt").equals("Email or password is incorrect")) {
             System.out.println("Customer account already exists!");
-            return;
+            return "Customer account already exists";
         }
 
         try {
@@ -73,6 +73,7 @@ public class Accounts {
         new File("Database/Accounts/CustomerAccounts/" + customerEmail).mkdirs();
 //        File messagesFile = new File("CustomerAccounts/" + customerEmail +
 //                "/messages.txt")
+        return "Customer account can be created";
     }
 
     public static void addSellerAccount(String sellerEmail, String sellerPassword) {
