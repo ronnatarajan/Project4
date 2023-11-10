@@ -59,14 +59,14 @@ public class EditDelete {
             System.out.println("Enter new message:");
             String newMessage = input.nextLine() + " - edited";
             String[] oldMessage = lines.get(messageNum - 1).split(",");
-            String recipient = oldMessage[1];
+            String recipient = oldMessage[2];
 
             String path2 = recipient;
             File recipientMessages = new File(path2);
             Scanner reader2 = new Scanner(recipientMessages);
             ArrayList<String> lines2 = new ArrayList<String>();
 
-            oldMessage[2] = newMessage;
+            oldMessage[1] = newMessage;
             newMessage = String.join(",", oldMessage);
             lines.set(messageNum - 1, newMessage);
 
