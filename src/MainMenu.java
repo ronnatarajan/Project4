@@ -1,6 +1,7 @@
 package src;
 
 import java.awt.desktop.UserSessionEvent;
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -46,8 +47,9 @@ public class MainMenu {
                     email = scanner.nextLine();
                     System.out.println(passwordPrompt);
                     password = scanner.nextLine();
-                    String check = Accounts.checkAccount(email, password, "Database/Lists/CustomerAccountsList.txt");
-                    if (check.equals("Found account")) {
+                    String checkC = Accounts.checkAccount(email, password, "Database/Lists/CustomerAccountsList.txt");
+                    String checkS = Accounts.checkAccount(email, password, "Database/Lists/SellerAccountsList.txt");
+                    if (checkC.equals("Found account") || checkS.equals("Found account")) {
                         correctInput = true;
                     } else {
                         System.out.println("{" + errorInvalidCredentials + "}");
@@ -86,9 +88,24 @@ public class MainMenu {
                             //send message
                             case 2:
                                 if (loggedIn.isSeller()) {
+                                    //seller implementation
+                                    ArrayList<User> customers = new ArrayList<>();
 
+                                    StringBuilder p = new StringBuilder();
+                                    p.append("{");
+                                    for (User user : users) {
+                                        if (!user.isSeller()) {
+                                            customers.add(user);
+                                            p.append(user.getUsername()).append(",");
+
+                                        }
+                                    }
+                                    p.deleteCharAt(p.length()-2);
+
+                                } else {
+                                    //customer implementation
                                 }
-                            
+
                         }
                     } catch (NumberFormatException e){
                         System.out.println("Please input a number (1,2, or 3) to select one of the given options");
