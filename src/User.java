@@ -11,7 +11,6 @@ public class User {
     private boolean seller;
 
     private ArrayList<User> blocked;
-    private ArrayList<User> blockedBy;
 
 
     /**
@@ -25,16 +24,16 @@ public class User {
         this.password = password;
         this.seller = seller;
         this.blocked = new ArrayList<>();
-        this.blockedBy = new ArrayList<>();
     }
 
-
+    public int sizeofblocked() {
+        return this.blocked.size();
+    }
 
     public User(String username, boolean seller) {
         this.username = username;
         this.seller = seller;
         this.blocked = new ArrayList<>();
-        this.blockedBy = new ArrayList<>();
     }
 
 
@@ -77,7 +76,6 @@ public class User {
      */
     public void block(User user) {
         this.blocked.add(user);
-        user.blockedBy.add(this);
     }
 
     /**
@@ -89,14 +87,7 @@ public class User {
         return this.blocked.contains(user);
     }
 
-    /**
-     * see if the current user is blocked by another
-     * @param user potential person who blocked the current user
-     * @return true if blocked by user, false if not
-     */
-    public boolean isBlockedBy(User user) {
-        return this.blockedBy.contains(user);
-    }
+
     /**
      * sees if this object is the same as another
      * @param o other User object

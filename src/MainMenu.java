@@ -1,6 +1,7 @@
 package src;
 
 import java.awt.desktop.UserSessionEvent;
+import java.io.*;
 import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -29,14 +30,15 @@ public class MainMenu {
 
     private static String mainMenu = "1. View Messages\n" +
             "2. Create Message\n" +
-            "3. Block User";
+            "3. Block User\n" +
+            "4. Exit";
 
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
 
 
         System.out.println(welcomeMessage);
-
+        ArrayList<User> users = Parse.getUsers();
         while (isRunning) {
             System.out.println(ongoingMenu);
             int userChoice = scanner.nextInt();
@@ -59,7 +61,7 @@ public class MainMenu {
                     }
                 }
 
-                ArrayList<User> users = Parse.getUsers();
+
                 User loggedIn = null;
                 for (User user : users) {
                     if (user.getUsername().equals(email) && user.getPassword().equals(password)) {
@@ -67,7 +69,7 @@ public class MainMenu {
                     }
                 }
 
-                ArrayList<Message> userMessages = Parse.getMessages(email, loggedIn.isSeller());
+                ArrayList<Message> userMessages = Parse.getMessages(email, loggedIn.isSeller(), !loggedIn.isSeller());
 
                 boolean exited = false;
                 while (!exited) {
@@ -77,17 +79,16 @@ public class MainMenu {
                         int selection = Integer.parseInt(scanner.next());
                         scanner.nextLine();
 
-                        if (selection != 1 || selection != 2 || selection != 3) {
+                        if (selection != 1 && selection != 2 && selection != 3 && selection != 4) {
                             throw new NumberFormatException();
                         }
-
                         switch(selection) {
                             //view list of messages
                             case 1:
                                 for (Message message : userMessages) {
                                     System.out.println(message.toString());
                                 }
-
+                                break;
                             //send message
                             case 2:
                                 if (loggedIn.isSeller()) {
@@ -99,13 +100,14 @@ public class MainMenu {
                                     p.append("{");
                                     for (User user : users) {
                                         if (!user.isSeller()) {
+                                            System.out.println(user.getUsername());
                                             customers.add(user);
                                             p.append(user.getUsername()).append(",");
 
                                         }
                                     }
 
-                                    p.deleteCharAt(p.length()-2);
+                                    p.deleteCharAt(p.length()-1);
                                     p.append("}");
                                     System.out.println(p);
 
@@ -124,6 +126,8 @@ public class MainMenu {
                                     } else {
                                         System.out.println("Please type in a message");
                                         String m = scanner.nextLine();
+
+                                        System.out.println(recipient.getUsername() + " has blocked " + recipient.sizeofblocked());
                                         try {
                                             Message message = new Message(m, loggedIn, recipient);
                                             userMessages.add(message);
@@ -137,6 +141,7 @@ public class MainMenu {
                                     //customer implementation
                                     HashMap<String, String[]> map = Parse.businesses();
                                     String[][] stores = map.values().toArray(new String[0][]);
+                                    System.out.println(stores[0][0]);
                                     System.out.println("Do you wish to message a store or a seller directly? (Enter 'store' or 'seller'");
                                     String messageType = scanner.nextLine();
                                     if (messageType.equals("store")) {
@@ -179,6 +184,7 @@ public class MainMenu {
                                         System.out.println("Please enter a message");
                                         String mess = scanner.nextLine();
 
+                                        System.out.println(recipient.getUsername() + " has blocked " + recipient.sizeofblocked());
                                         try {
                                             Message m = new Message(mess, loggedIn, recipient);
                                             userMessages.add(m);
@@ -190,6 +196,8 @@ public class MainMenu {
                                     }
 
                                 }
+                                break;
+
                             case 3:
                                 System.out.println("Name the email of the user you wish to block");
                                 String blockEmail = scanner.nextLine();
@@ -197,10 +205,38 @@ public class MainMenu {
                                 for (User user : users) {
                                     if (user.getUsername().equals(blockEmail)) {
                                         loggedIn.block(user);
+                                        System.out.println(loggedIn.getUsername() + " has blocked " + loggedIn.sizeofblocked());
                                         break;
                                     }
                                 }
                                 System.out.println("Blocked user!");
+                                break;
+
+                            case 4:
+                                try {
+                                    PrintWriter sender = new PrintWriter(new BufferedWriter(new FileWriter("Accounts/" + loggedIn.getUsername() + ".txt", true)));
+                                    for (Message m : userMessages){
+                                        sender.println(m.getSender().getUsername() + "," + m.getMessage() + "," + m.getRecipient().getUsername());
+
+                                        PrintWriter receiver = new PrintWriter(new BufferedWriter(new FileWriter("Accounts/" + m.getRecipient().getUsername() + ".txt", true)));
+                                        receiver.println(m.getSender().getUsername() + "," + m.getMessage() + "," + m.getRecipient().getUsername());
+
+                                        receiver.flush();
+                                        receiver.close();
+                                    }
+
+                                    sender.flush();
+                                    sender.close();
+                                    exited = true;
+
+                                } catch (IOException e) {
+                                    System.out.println("CustomerAccountsList.txt does not exist!");
+                                }
+                                break;
+                            default:
+                                System.out.println("Invalid selection");
+                                // Code for default case
+                                break;
                         }
                     } catch (NumberFormatException e){
                         System.out.println("Please input a number (1,2, or 3) to select one of the given options");
@@ -259,7 +295,7 @@ public class MainMenu {
                         } else {
                             System.out.println(storesPrompt);
                             String stores = scanner.nextLine();
-                            Stores.appendStores(email, stores);
+                            Stores.appendStores(stores, email);
                             System.out.println(signUpThankYou);
                             MainMenu.main(null);
                         }

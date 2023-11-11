@@ -58,6 +58,8 @@ public class Parse {
             while (line != null) {
                 String[] arr = line.split(":")[1].split(",");
                 map.put(line.split(":")[0], arr);
+
+                line = reader.readLine();
             }
 
             return map;
@@ -66,13 +68,13 @@ public class Parse {
         }
     }
 
-    public static ArrayList<Message> getMessages(String email, boolean isSeller) {
+    public static ArrayList<Message> getMessages(String email, boolean senderIsSeller, boolean recipientIsSeller) {
         ArrayList<Message> messages = new ArrayList<>();
-        File customerMessages = new File("Accounts/CustomerAcounts." + email);
+        File customerMessages = null;
 
         try{
             //read from customer file
-            customerMessages = new File("Accounts/CustomerAcounts." + email);
+            customerMessages = new File("Accounts/" + email + ".txt");
             BufferedReader customerReader = new BufferedReader(new FileReader(customerMessages));
             String customerLine = customerReader.readLine();
 
@@ -80,8 +82,8 @@ public class Parse {
             while (customerLine != null) {
                 String[] lineArr = customerLine.split(",");
                 // senderEmail + "," + newMessage + "," + recipientEmail
-                User sender = new User(lineArr[0], isSeller);
-                User receiver = new User(lineArr[2], isSeller);
+                User sender = new User(lineArr[0], senderIsSeller);
+                User receiver = new User(lineArr[2], recipientIsSeller);
 
                 Message m = new Message(lineArr[1], sender, receiver);
                 messages.add(m);

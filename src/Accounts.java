@@ -25,8 +25,6 @@ public class Accounts {
                 line = bufferedReader.readLine();
             }
 
-            return "Email or password is incorrect";
-
 
         } catch (FileNotFoundException e) {
             System.out.println("File does not exist!");
@@ -36,7 +34,7 @@ public class Accounts {
             e.printStackTrace();
         }
 
-        return "Could not find account";
+        return "";
 
 //        return "Customer account not found!";
 //        for testing
@@ -55,6 +53,9 @@ public class Accounts {
             PrintWriter printWriter = new PrintWriter(new BufferedWriter(new FileWriter("Database/Lists/CustomerAccountsList.txt", true)));
             printWriter.println(customerEmail + "," + customerPassword);
 
+            File f = new File("Accounts/" + customerEmail + ".txt");
+            f.createNewFile();
+
             printWriter.flush();
             printWriter.close();
 
@@ -62,9 +63,6 @@ public class Accounts {
             System.out.println("CustomerAccountsList.txt does not exist!");
         }
 
-        new File("Database/Accounts/CustomerAccounts/" + customerEmail).mkdirs();
-//        File messagesFile = new File("CustomerAccounts/" + customerEmail +
-//                "/messages.txt")
         return "Customer account can be created";
     }
 
@@ -78,6 +76,9 @@ public class Accounts {
             PrintWriter printWriter = new PrintWriter(new BufferedWriter(new FileWriter("Database/Lists/SellerAccountsList.txt", true)));
             printWriter.println(sellerEmail + "," + sellerPassword);
 
+            File f = new File("Accounts/" + sellerEmail + ".txt");
+            f.createNewFile();
+
             printWriter.flush();
             printWriter.close();
 
@@ -85,10 +86,6 @@ public class Accounts {
             e.printStackTrace();
             System.out.println("SellerAccountsList.txt does not exist!");
         }
-
-        new File("Database/Accounts/SellerAccounts/" + sellerEmail).mkdirs();
-        File storesFile = new File("Database/Accounts/SellerAccounts/" + sellerEmail +
-                "/Stores.txt");
         return "Seller account can be created";
     }
     public static void main(String[] args) {

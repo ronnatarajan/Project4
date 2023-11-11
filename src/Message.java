@@ -15,14 +15,17 @@ public class Message {
      * @param recipient User
      */
     public Message(String message, User sender, User recipient) throws InvalidMessageException {
-        if (sender.isSeller() == sender.isSeller()) {
+        if (sender.isSeller() == recipient.isSeller()) {
             if (sender.isSeller()) {
                 throw new InvalidMessageException("Seller cannot message another seller");
-            } else if (recipient.hasBlocked(sender)) {
-                throw new InvalidMessageException("You have been blocked");
-            }else {
+            } else {
                 throw new InvalidMessageException("Buyer cannot message another buyer");
             }
+        }
+
+        if (recipient.hasBlocked(sender)) {
+            System.out.println("threw exception");
+            throw new InvalidMessageException("You have been blocked");
         }
         this.message = message;
         this.sender = sender;
