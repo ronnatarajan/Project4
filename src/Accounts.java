@@ -7,32 +7,25 @@ public class Accounts {
     public static String checkAccount(String email, String password, String path) {
 
         try {
-            BufferedReader bufferedReader = new BufferedReader(new FileReader(path));
+            File f = new File(path);
+            BufferedReader bufferedReader = new BufferedReader(new FileReader(f));
 
-            String line = "";
+            boolean found = false;
+            String line = bufferedReader.readLine();
+            while (line != null) {
+                String[] lineArr = line.split(",");
 
-            int counter = 0;
-            String readEmail = "";
-            String readPassword = "";
-
-            while ((line = bufferedReader.readLine()) != null) {
-                if (counter == 0) {
-                    readEmail = line;
-                    counter++;
-                } else if (counter == 1) {
-                    readPassword = line;
-                    counter = 0;
-                }
-
-
-                if ((email.equals(readEmail)) && (password.equals(readPassword))) {
+                if ((email.equals(lineArr[0])) && (password.equals(lineArr[1]))) {
                     return "Found account";
                     // return "Customer account found!";
                     // for testing
-                } else if ((email.equals(readEmail)) || (password.equals(readPassword))) {
-                    return "Email or password is incorrect";
+                } else if ((email.equals(lineArr[0]))){
+                    return "Found account";
                 }
+                line = bufferedReader.readLine();
             }
+
+            return "Email or password is incorrect";
 
 
         } catch (FileNotFoundException e) {
@@ -52,7 +45,8 @@ public class Accounts {
 
 
     public static String addCustomerAccount(String customerEmail, String customerPassword) {
-        if (checkAccount(customerEmail, customerPassword, "Database/Lists/CustomerAccountsList.txt").equals("Email or password is incorrect")) {
+        System.out.println(checkAccount(customerEmail, customerPassword, "Database/Lists/CustomerAccountsList.txt"));
+        if (checkAccount(customerEmail, customerPassword, "Database/Lists/SellerAccountsList.txt").equals("Found account") || checkAccount(customerEmail, customerPassword, "Database/Lists/CustomerAccountsList.txt").equals("Found account")) {
             System.out.println("Customer account already exists!");
             return "Customer account already exists";
         }
@@ -75,7 +69,7 @@ public class Accounts {
     }
 
     public static String addSellerAccount(String sellerEmail, String sellerPassword) {
-        if (checkAccount(sellerEmail, sellerPassword,"Database/Lists/SellerAccountsList.txt").equals("Email or password is incorrect")) {
+        if (checkAccount(sellerEmail, sellerPassword, "Database/Lists/SellerAccountsList.txt").equals("Found account") || checkAccount(sellerEmail, sellerPassword, "Database/Lists/CustomerAccountsList.txt").equals("Found account")) {
             System.out.println("Seller account already exists!");
             return "Seller account already exists!";
         }
