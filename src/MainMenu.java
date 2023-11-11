@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class MainMenu {
+    public static String storesPrompt = "What stores would you like to register?\nPlease separate each store using a comma, do not put spaces in between (ex. Store1,Store2)";
     public static String welcomeMessage = "Welcome to Market Place Messaging System";
     public static String emailPrompt = "Please input your email.";
     public static String passwordPrompt = "Please input your password.";
@@ -162,6 +163,9 @@ public class MainMenu {
                         if (addSellerAccount.contains("Seller account already exists!")) {
                             break;
                         } else {
+                            System.out.println(storesPrompt);
+                            String stores = scanner.nextLine();
+                            Stores.appendStores(email, stores);
                             System.out.println(signUpThankYou);
                             MainMenu.main(null);
                         }

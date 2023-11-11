@@ -8,11 +8,11 @@ public class Stores {
 
         String fileName = "Database/Accounts/SellerAccounts/" + sellerEmail + "/Stores.txt";
 
-        appendStores(fileName,storeName,sellerEmail);
+        appendStores(storeName,sellerEmail);
 
     }
 
-    public static void appendStores(String fileName, String storeName, String sellerEmail) {
+    public static void appendStores(String storeName, String sellerEmail) {
 
 //        // Appends to other seller's Stores.txt
 //        try {
@@ -107,7 +107,4 @@ public class Stores {
             throw new RuntimeException(e);
         }
     }
-
-
-
 }
