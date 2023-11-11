@@ -59,9 +59,7 @@ public class Accounts {
 
         try {
             PrintWriter printWriter = new PrintWriter(new BufferedWriter(new FileWriter("Database/Lists/CustomerAccountsList.txt", true)));
-
-            printWriter.println(customerEmail);
-            printWriter.println(customerPassword);
+            printWriter.println(customerEmail + "," + customerPassword);
 
             printWriter.flush();
             printWriter.close();
@@ -83,9 +81,7 @@ public class Accounts {
 
         try {
             PrintWriter printWriter = new PrintWriter(new BufferedWriter(new FileWriter("Database/Lists/SellerAccountsList.txt", true)));
-
-            printWriter.println(sellerEmail);
-            printWriter.println(sellerPassword);
+            printWriter.println(sellerEmail + "," + sellerPassword);
 
             printWriter.flush();
             printWriter.close();

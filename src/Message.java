@@ -48,4 +48,9 @@ public class Message {
     public User getRecipient() {
         return recipient;
     }
+
+    @Override
+    public String toString() {
+        return "Sender: " + sender.getUsername() + "; message: " + this.message + "; recipient" + recipient.getUsername();
+    }
 }

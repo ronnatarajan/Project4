@@ -28,6 +28,16 @@ public class User {
         this.blockedBy = new ArrayList<>();
     }
 
+
+
+    public User(String username, boolean seller) {
+        this.username = username;
+        this.seller = seller;
+        this.blocked = new ArrayList<>();
+        this.blockedBy = new ArrayList<>();
+    }
+
+
     /**
      * getter for username
      *
@@ -97,7 +107,7 @@ public class User {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         User user = (User) o;
-        return seller == user.seller && Objects.equals(username, user.username) && Objects.equals(password, user.password) && Objects.equals(blocked, user.blocked);
+        return Objects.equals(username, user.username) && Objects.equals(password, user.password);
     }
 
     @Override

@@ -1,3 +1,7 @@
+package src;
+
+import src.SendMessages;
+
 import java.util.*;
 import java.io.*;
 
@@ -56,7 +60,7 @@ public class FileInExp {
                     }
                 }
 
-                SendMessages.sellerSendsMessage(to, from, message, storeName);
+                SendMessages.sellerSendsMessage(to, from, message);
             } else {
                 SendMessages.customerSendsMessage(to, from, message);
             }
