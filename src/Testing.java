@@ -19,8 +19,6 @@ public class Testing {
 
 
 
-
-
 //
 //        Scanner scan = new Scanner(System.in);
 ////        String email = scan.nextLine();

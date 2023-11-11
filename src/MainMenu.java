@@ -8,13 +8,17 @@ public class MainMenu {
     public static String welcomeMessage = "Welcome to Market Place Messaging System";
     public static String emailPrompt = "Please input your email.";
     public static String passwordPrompt = "Please input your password.";
+    public static String passwordVerifyPrompt = "Please re-enter your password to confirm.";
     public static String farewellMessage = "Goodbye!";
+    public static String signUpThankYou = "Thank you for signing up!";
     public static String signUpBuyerOrSeller = "Would you like to sign up as a Buyer 'B'  or a Seller 'S'?";
-    public static String errorMessageBuyerOrSeller= "Error, please enter 'B' (Buyer) or 'S' (Seller)";
+    public static String errorMessageBuyerOrSeller = "Error, please enter 'B' (Buyer) or 'S' (Seller)";
     public static String errorValidInput = "Error, please enter a valid input (1-3)";
+    public static String errorPasswordMatch = "Error, the re-entered password doesn't not match the original";
     public static boolean isRunning = true;
     public static String errorInvalidCredentials = "Error, please enter valid credentials";
     public static boolean isWrong = false;
+    public static boolean passwordMatchCheck = false;
     private static String ongoingMenu = "1. Login\n" +
             "2. Sign Up\n" +
             "3. Exit";
@@ -70,6 +74,7 @@ public class MainMenu {
                         scanner.nextLine();
 
                         switch(selection) {
+                            //view list of messages
                             case 1 -> {
                                 for (Message message : userMessages) {
                                     System.out.println(message.toString());
@@ -80,7 +85,6 @@ public class MainMenu {
                         System.out.println("Please input a number to select on of the given options");
                     }
                 }
-
             } else if (userChoice == 2) {
                 while (isRunning) {
                     System.out.println(signUpBuyerOrSeller);
@@ -101,21 +105,36 @@ public class MainMenu {
                     String email = scanner.nextLine();
                     System.out.println(passwordPrompt);
                     String password = scanner.nextLine();
-                    // add a checker for valid input
+
+                    System.out.println(passwordVerifyPrompt);
+                    String verifiedPassword = scanner.nextLine();
+
+                    if (!verifiedPassword.equals(password)) {
+                        passwordMatchCheck = true;
+                        while (passwordMatchCheck) {
+                            System.out.println(errorPasswordMatch);
+                            System.out.println(passwordVerifyPrompt);
+                            verifiedPassword = scanner.nextLine();
+                            if (verifiedPassword.equals(password)) {
+                                passwordMatchCheck = false;
+                            }
+
+                        }
+                    }
                     if (response.equals("b")) {
                         Accounts.addCustomerAccount(email, password);
-                        isRunning = false;
-                        // add goodbye message
+                        System.out.println(signUpThankYou);
+                        MainMenu.main(null);
                     }
                     if (response.equals("s")) {
-                        System.out.println(emailPrompt);
-                        String sellerEmail = scanner.nextLine();
-                        System.out.println(passwordPrompt);
-                        String sellerPassword = scanner.nextLine();
-                        //add in validate password
-                        Accounts.addSellerAccount(sellerEmail, sellerPassword);
-                        isRunning = false;
-                        // add goodbye message
+                        Accounts.addSellerAccount(email, password);
+                        if (Accounts.checkAccount(email, password, "Database/Lists/SellerAccountsList.txt").equals("Email or password is incorrect")) {
+                            System.out.println("Seller account already exists!");
+                            return;
+                        } else {
+                            System.out.println(signUpThankYou);
+                            MainMenu.main(null);
+                        }
                     }
                 }
             } else if (userChoice == 3) {
