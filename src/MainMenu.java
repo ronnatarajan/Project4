@@ -3,6 +3,7 @@ package src;
 import java.awt.desktop.UserSessionEvent;
 import java.lang.reflect.Array;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Scanner;
 
 public class MainMenu {
@@ -26,7 +27,8 @@ public class MainMenu {
 
     private static String mainMenu = "1. View Messages\n" +
             "2. Create Message\n" +
-            "3. Delete Message";
+            "3. Delete Message" +
+            "4. Block User";
 
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
@@ -89,6 +91,7 @@ public class MainMenu {
                             case 2:
                                 if (loggedIn.isSeller()) {
                                     //seller implementation
+                                    System.out.println("Pick one of the customers below to message");
                                     ArrayList<User> customers = new ArrayList<>();
 
                                     StringBuilder p = new StringBuilder();
@@ -100,10 +103,40 @@ public class MainMenu {
 
                                         }
                                     }
+
                                     p.deleteCharAt(p.length()-2);
+                                    p.append("}");
+                                    System.out.println(p);
+
+                                    String customerSelection = scanner.nextLine();
+
+                                    boolean found = false;
+                                    User recipient = null;
+                                    for (User user : customers) {
+                                        if (user.getUsername().equals(customerSelection)) {
+                                            found = true;
+                                            recipient = user;
+                                        }
+                                    }
+                                    if (!found) {
+                                        System.out.println("Please input one of the users allowed");
+                                    } else {
+                                        System.out.println("Please type in a message");
+                                        String m = scanner.nextLine();
+                                        try {
+                                            Message message = new Message(m, loggedIn, recipient);
+                                            userMessages.add(message);
+                                            System.out.println("Message added!");
+                                        } catch (InvalidMessageException e) {
+                                            System.out.println(e.getMessage());
+                                        }
+                                    }
 
                                 } else {
                                     //customer implementation
+                                    HashMap<String, String[]> map = Parse.businesses();
+                                    String[][] stores = map.values().toArray(new String[0][]);
+
                                 }
 
                         }

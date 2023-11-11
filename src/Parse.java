@@ -3,6 +3,7 @@ package src;
 import java.io.*;
 import java.lang.reflect.Array;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public class Parse {
     public static ArrayList<User> getUsers() {
@@ -44,6 +45,26 @@ public class Parse {
         return userList;
     }
 
+    public static HashMap<String, String[]> businesses() {
+        HashMap<String, String[]> map = new HashMap<>();
+
+        try {
+            //read from customer file
+            File stores = new File("Database/Lists/StoresList.txt");
+            BufferedReader reader = new BufferedReader(new FileReader(stores));
+            String line = reader.readLine();
+
+            // [seller]:[b1,b2,b3,b4]}
+            while (line != null) {
+                String[] arr = line.split(":")[1].split(",");
+                map.put(line.split(":")[0], arr);
+            }
+
+            return map;
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
 
     public static ArrayList<Message> getMessages(String email, boolean isSeller) {
         ArrayList<Message> messages = new ArrayList<>();

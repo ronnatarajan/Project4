@@ -1,5 +1,6 @@
 package src;
 
+import java.util.HashMap;
 import java.util.Scanner;
 
 public class Testing {
@@ -11,10 +12,13 @@ public class Testing {
 //
 //        Stores.createStore("BobHardware@gmail.com", "Bob's Hardware");
 
-        String message = "I need it for a home building project.";
+        HashMap<String, String[]> map = new HashMap<>();
+        map.put("Bob", new String[]{"FedEx", "Apple"});
+        map.put("Cat", new String[]{"Google", "Purdue"});
 
-        SendMessages.customerSendsMessage("BobHardware@gmail.com","Harley@gmail.com", message);
 
+        String[][] stores = map.values().toArray(new String[0][]);
+        System.out.println(stores[0][1]);
 
 
 

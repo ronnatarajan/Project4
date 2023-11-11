@@ -8,34 +8,18 @@ public class Stores {
 
         String fileName = "Database/Accounts/SellerAccounts/" + sellerEmail + "/Stores.txt";
 
-        appendStores(fileName,storeName,sellerEmail);
+        appendStores(storeName,sellerEmail);
 
     }
 
-    public static void appendStores(String fileName, String storeName, String sellerEmail) {
-
-//        // Appends to other seller's Stores.txt
-//        try {
-//            PrintWriter printWriter = new PrintWriter(new BufferedWriter(new FileWriter(fileName,true)));
-//
-//            printWriter.println(storeName);
-//            printWriter.println(sellerEmail);
-//
-//            printWriter.flush();
-//            printWriter.close();
-//
-//        } catch (IOException e) {
-//            throw new RuntimeException(e);
-//        }
-
-
+    public static void appendStores(String stores, String sellerEmail) {
         // Appends to the StoresList.txt
         try {
             PrintWriter printWriter =
                     new PrintWriter(new BufferedWriter(new FileWriter("Database/Lists/StoresList.txt",true)));
 
-            printWriter.println(storeName);
-            printWriter.println(sellerEmail);
+            printWriter.print(sellerEmail + ":" + stores);
+            printWriter.println();
 
             printWriter.flush();
             printWriter.close();
