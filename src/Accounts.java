@@ -74,10 +74,10 @@ public class Accounts {
         return "Customer account can be created";
     }
 
-    public static void addSellerAccount(String sellerEmail, String sellerPassword) {
+    public static String addSellerAccount(String sellerEmail, String sellerPassword) {
         if (checkAccount(sellerEmail, sellerPassword,"Database/Lists/SellerAccountsList.txt").equals("Email or password is incorrect")) {
             System.out.println("Seller account already exists!");
-            return;
+            return "Seller account already exists!";
         }
 
         try {
@@ -95,8 +95,8 @@ public class Accounts {
         new File("Database/Accounts/SellerAccounts/" + sellerEmail).mkdirs();
         File storesFile = new File("Database/Accounts/SellerAccounts/" + sellerEmail +
                 "/Stores.txt");
+        return "Seller account can be created";
     }
-
 }
 
 
