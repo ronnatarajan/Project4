@@ -148,14 +148,17 @@ public class MainMenu {
                         }
                     }
                     if (response.equals("b")) {
-                        Accounts.addCustomerAccount(email, password);
-                        System.out.println(signUpThankYou);
-                        MainMenu.main(null);
+                        String addCustomerAccount = Accounts.addCustomerAccount(email, password);
+                        if (addCustomerAccount.contains("Customer account already exists")) {
+                            return;
+                        } else {
+                            System.out.println(signUpThankYou);
+                            MainMenu.main(null);
+                        }
                     }
                     if (response.equals("s")) {
-                        Accounts.addSellerAccount(email, password);
-                        if (Accounts.checkAccount(email, password, "Database/Lists/SellerAccountsList.txt").equals("Email or password is incorrect")) {
-                            System.out.println("Seller account already exists!");
+                        String addSellerAccount = Accounts.addSellerAccount(email, password);
+                        if (addSellerAccount.contains("Seller account already exists!")) {
                             return;
                         } else {
                             System.out.println(signUpThankYou);
