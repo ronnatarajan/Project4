@@ -15,7 +15,7 @@ public class Testing {
 
         SendMessages.customerSendsMessage("BobHardware@gmail.com","Harley@gmail.com", message);
 
-        SendMessages.printCustomerMessages("Harley@gmail.com", "BobHardware@gmail.com");
+        //SendMessages.printCustomerMessages("Harley@gmail.com", "BobHardware@gmail.com");
 
 
 

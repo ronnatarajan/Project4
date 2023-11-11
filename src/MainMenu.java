@@ -11,7 +11,7 @@ public class MainMenu {
     public static String farewellMessage = "Goodbye!";
     public static String signUpThankYou = "Thank you for signing up!";
     public static String signUpBuyerOrSeller = "Would you like to sign up as a Buyer 'B'  or a Seller 'S'?";
-    public static String errorMessageBuyerOrSeller= "Error, please enter 'B' (Buyer) or 'S' (Seller)";
+    public static String errorMessageBuyerOrSeller = "Error, please enter 'B' (Buyer) or 'S' (Seller)";
     public static String errorValidInput = "Error, please enter a valid input (1-3)";
     public static String errorPasswordMatch = "Error, the re-entered password doesn't not match the original";
     public static boolean isRunning = true;
@@ -32,11 +32,6 @@ public class MainMenu {
             int userChoice = scanner.nextInt();
             scanner.nextLine();
             if (userChoice == 1) {
-                System.out.println(emailPrompt);
-                String email = scanner.nextLine();
-                System.out.println(passwordPrompt);
-                String password = scanner.nextLine();
-                Accounts.checkAccount(email, password, "Database/Lists/CustomerAccountsList.txt");
 
             } else if (userChoice == 2) {
                 while (isRunning) {
@@ -81,8 +76,13 @@ public class MainMenu {
                     }
                     if (response.equals("s")) {
                         Accounts.addSellerAccount(email, password);
-                        System.out.println(signUpThankYou);
-                        MainMenu.main(null);
+                        if (Accounts.checkAccount(email, password, "Database/Lists/SellerAccountsList.txt").equals("Email or password is incorrect")) {
+                            System.out.println("Seller account already exists!");
+                            return;
+                        } else {
+                            System.out.println(signUpThankYou);
+                            MainMenu.main(null);
+                        }
                     }
                 }
             } else if (userChoice == 3) {
