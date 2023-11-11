@@ -112,7 +112,8 @@ public class MainMenu {
                     }
                 }
             } else if (userChoice == 2) {
-                while (isRunning) {
+                boolean run = true;
+                while (run) {
                     System.out.println(signUpBuyerOrSeller);
                     String response = scanner.nextLine().toLowerCase().trim();
 
@@ -150,7 +151,7 @@ public class MainMenu {
                     if (response.equals("b")) {
                         String addCustomerAccount = Accounts.addCustomerAccount(email, password);
                         if (addCustomerAccount.contains("Customer account already exists")) {
-                            return;
+                            break;
                         } else {
                             System.out.println(signUpThankYou);
                             MainMenu.main(null);
@@ -159,7 +160,7 @@ public class MainMenu {
                     if (response.equals("s")) {
                         String addSellerAccount = Accounts.addSellerAccount(email, password);
                         if (addSellerAccount.contains("Seller account already exists!")) {
-                            return;
+                            break;
                         } else {
                             System.out.println(signUpThankYou);
                             MainMenu.main(null);
