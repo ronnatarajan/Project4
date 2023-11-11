@@ -91,6 +91,40 @@ public class Accounts {
                 "/Stores.txt");
         return "Seller account can be created";
     }
+    public static void main(String[] args) {
+
+        // Test checkAccount method
+        System.out.println("Testing checkAccount method:");
+        String email = "test@example.com";
+        String password = "password123";
+        String path = "Database/Lists/CustomerAccountsList.txt";
+        String result = Accounts.checkAccount(email, password, path);
+        System.out.println(result);
+        System.out.println();
+
+        // Test addCustomerAccount method
+        System.out.println("Testing addCustomerAccount method:");
+        String newCustomerEmail = "newcustomer@example.com";
+        String newCustomerPassword = "newpassword456";
+        result = Accounts.addCustomerAccount(newCustomerEmail, newCustomerPassword);
+        System.out.println(result);
+        System.out.println();
+
+        // Test addSellerAccount method
+        System.out.println("Testing addSellerAccount method:");
+        String newSellerEmail = "newseller@example.com";
+        String newSellerPassword = "sellerpassword789";
+        result = Accounts.addSellerAccount(newSellerEmail, newSellerPassword);
+        System.out.println(result);
+        System.out.println();
+
+        // Test checkAccount after adding new accounts
+        System.out.println("Testing checkAccount after adding accounts:");
+        result = Accounts.checkAccount(newCustomerEmail, newCustomerPassword, path);
+        System.out.println(result);
+        result = Accounts.checkAccount(newSellerEmail, newSellerPassword, path);
+        System.out.println(result);
+    }
 }
 
 
