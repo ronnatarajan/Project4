@@ -49,17 +49,6 @@ public class FileInExp {
             }
 
             if (isSeller) {
-                File storesList = new File("Database/Lists/StoresList.txt");
-                Scanner parseStores = new Scanner(storesList);
-                String storeName;
-                while (parseStores.hasNextLine()) {
-                    storeName = parseStores.nextLine();
-                    String sellerName = parseStores.nextLine();
-                    if (sellerName.equals(from)) {
-                        break;
-                    }
-                }
-
                 SendMessages.sellerSendsMessage(to, from, message);
             } else {
                 SendMessages.customerSendsMessage(to, from, message);
