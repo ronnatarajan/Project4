@@ -75,7 +75,7 @@ public class User {
      * add a user to the list of people the current user has blocked
      * @param user User
      */
-    public void addBlocked(User user) {
+    public void block(User user) {
         this.blocked.add(user);
         user.blockedBy.add(this);
     }

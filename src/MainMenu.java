@@ -5,6 +5,7 @@ import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Scanner;
+import java.util.*;
 
 public class MainMenu {
     public static String storesPrompt = "What stores would you like to register?\nPlease separate each store using a comma, do not put spaces in between (ex. Store1,Store2)";
@@ -28,8 +29,7 @@ public class MainMenu {
 
     private static String mainMenu = "1. View Messages\n" +
             "2. Create Message\n" +
-            "3. Delete Message" +
-            "4. Block User";
+            "3. Block User";
 
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
@@ -128,7 +128,7 @@ public class MainMenu {
                                             Message message = new Message(m, loggedIn, recipient);
                                             userMessages.add(message);
                                             System.out.println("Message added!");
-                                        } catch (InvalidMessageException e) {
+                                        } catch (Exception e) {
                                             System.out.println(e.getMessage());
                                         }
                                     }
@@ -137,9 +137,70 @@ public class MainMenu {
                                     //customer implementation
                                     HashMap<String, String[]> map = Parse.businesses();
                                     String[][] stores = map.values().toArray(new String[0][]);
+                                    System.out.println("Do you wish to message a store or a seller directly? (Enter 'store' or 'seller'");
+                                    String messageType = scanner.nextLine();
+                                    if (messageType.equals("store")) {
+                                        System.out.println("Select one of the following stores to message");
+                                        StringBuilder p = new StringBuilder("{");
+                                        for (String[] store : stores) {
+                                            for (String s : store) {
+                                                p.append(s).append(", ");
+                                            }
+                                        }
+                                        p.append("}");
+                                        p.deleteCharAt(p.length()-2);
+                                        System.out.println(p);
+
+                                        String store = scanner.nextLine();
+                                        String[] arr = null;
+
+                                        for (String[] storeList : stores) {
+                                            for (String s : storeList) {
+                                                if (s.equals(store)) {
+                                                    arr = storeList;
+                                                    break;
+                                                }
+                                            }
+                                        }
+
+                                        String associatedSeller = "";
+                                        for (Map.Entry<String, String[]> entry : map.entrySet()) {
+                                            if (entry.getValue().equals(arr)) {
+                                                associatedSeller = entry.getKey();
+                                            }
+                                        }
+
+                                        User recipient = null;
+                                        for (User u: users) {
+                                            if (u.getUsername().equals(associatedSeller)) {
+                                                recipient = u;
+                                            }
+                                        }
+                                        System.out.println("Please enter a message");
+                                        String mess = scanner.nextLine();
+
+                                        try {
+                                            Message m = new Message(mess, loggedIn, recipient);
+                                            userMessages.add(m);
+                                            System.out.println("Message added!");
+                                        } catch (Exception e) {
+                                            System.out.println(e.getMessage());
+                                        }
+
+                                    }
 
                                 }
+                            case 3:
+                                System.out.println("Name the email of the user you wish to block");
+                                String blockEmail = scanner.nextLine();
 
+                                for (User user : users) {
+                                    if (user.getUsername().equals(blockEmail)) {
+                                        loggedIn.block(user);
+                                        break;
+                                    }
+                                }
+                                System.out.println("Blocked user!");
                         }
                     } catch (NumberFormatException e){
                         System.out.println("Please input a number (1,2, or 3) to select one of the given options");
