@@ -66,23 +66,32 @@ public class MainMenu {
 
                 boolean exited = false;
                 while (!exited) {
-                    boolean validInput = false;
                     System.out.println(mainMenu);
 
                     try {
                         int selection = Integer.parseInt(scanner.next());
                         scanner.nextLine();
 
+                        if (selection != 1 || selection != 2 || selection != 3) {
+                            throw new NumberFormatException();
+                        }
+
                         switch(selection) {
                             //view list of messages
-                            case 1 -> {
+                            case 1:
                                 for (Message message : userMessages) {
                                     System.out.println(message.toString());
                                 }
-                            }
+
+                            //send message
+                            case 2:
+                                if (loggedIn.isSeller()) {
+
+                                }
+                            
                         }
                     } catch (NumberFormatException e){
-                        System.out.println("Please input a number to select on of the given options");
+                        System.out.println("Please input a number (1,2, or 3) to select one of the given options");
                     }
                 }
             } else if (userChoice == 2) {
