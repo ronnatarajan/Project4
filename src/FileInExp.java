@@ -6,13 +6,13 @@ import java.util.*;
 import java.io.*;
 
 public class FileInExp {
-    public static void exportMessage() {
+    public static void exportMessage(String user) {
         Scanner input = new Scanner(System.in);
-        System.out.println("Enter the file path of the message to be exported: ");
-        String path = input.nextLine();
+        String path = "Accounts/" + user + ".txt";
         try {
             File f = new File(path);
-            File export = new File(path + "export.csv");
+            System.out.println("Enter Path For Export to be Saved to:");
+            File export = new File(input.nextLine());
             export.createNewFile();
             FileWriter writer = new FileWriter(export);
             Scanner reader = new Scanner(f);

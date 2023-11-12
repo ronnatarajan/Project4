@@ -216,7 +216,7 @@ public class MainMenu {
                                 System.out.println("Blocked user!");
                                 break;
                             case 4:
-                                FileInExp.exportMessage();
+                                FileInExp.exportMessage(loggedIn.getUsername());
                                 break;
                             case 5:
                                 if (loggedIn.isSeller()) {
