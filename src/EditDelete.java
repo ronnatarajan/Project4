@@ -52,7 +52,7 @@ public class EditDelete {
 
             writer.close();
         } catch (Exception e) {
-            e.printStackTrace();
+            System.out.println("Please Enter Correct Info");
         }
     }
     // Method to edit messages
@@ -133,7 +133,7 @@ public class EditDelete {
         }
         } while(answer.equals("y"));
     } catch (Exception e) {
-        e.printStackTrace();
+        System.out.println("Please Enter Correct Info");
     }
     }
 }

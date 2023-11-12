@@ -42,7 +42,7 @@ public class FileInExp {
             } while(answer.equals("y"));
             writer.close();
         } catch (Exception e) {
-            e.printStackTrace();
+            System.out.println("Please Enter Correct Information");
         }
     }
     // Method to import messages
@@ -67,7 +67,7 @@ public class FileInExp {
             }
 
         } catch (Exception e) {
-            e.printStackTrace();
+            System.out.println("Please Enter Correct Information");
         }
     }
 }
