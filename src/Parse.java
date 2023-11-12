@@ -2,6 +2,7 @@ package src;
 
 import java.io.*;
 import java.lang.reflect.Array;
+import java.security.spec.ECField;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -22,7 +23,7 @@ public class Parse {
                     User user = new User(lineArr[0], lineArr[1], false);
                     userList.add(user);
                 } catch(Exception e ) {
-                    
+
                 }
 
                 customerLine = customerReader.readLine();
@@ -36,8 +37,12 @@ public class Parse {
             //loop through seller file and populate list with all users that are sellers
             while (sellerLine != null) {
                 String[] lineArr = sellerLine.split(",");
-                User user = new User(lineArr[0], lineArr[1], true);
-                userList.add(user);
+                try {
+                    User user = new User(lineArr[0], lineArr[1], true);
+                    userList.add(user);
+                } catch(Exception e) {
+                    
+                }
                 sellerLine = sellerReader.readLine();
             }
 
