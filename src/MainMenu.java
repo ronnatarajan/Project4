@@ -308,6 +308,50 @@ public class MainMenu {
                                             break;
                                         }
                                     }
+
+                                    try {
+                                        File f = null;
+                                        if (loggedIn.isSeller()) {
+                                            f = new File("Database/Lists/SellerAccountsList.txt");
+                                        } else {
+                                            f = new File("Database/Lists/CustomerAccountsList.txt");
+                                        }
+                                        BufferedReader reader = new BufferedReader(new FileReader(f));
+
+                                        String line = reader.readLine();
+                                        ArrayList<String> lines = new ArrayList<>();
+
+                                        while (line != null) {
+                                            String[] lineArr = line.split(",");
+                                            if (lineArr[0].equals(loggedIn.getUsername())
+                                                    && lineArr[1].equals(loggedIn.getPassword())) {
+
+                                                String blocked = String.valueOf(loggedIn.getBlocked());
+                                                lineArr[2] = blocked;
+
+                                                String invisible = String.valueOf(loggedIn.getInvisible());
+                                                lineArr[3] = invisible;
+
+
+                                            }
+                                            String backToString = Arrays.toString(lineArr);
+                                            lines.add(backToString.substring(1, backToString.length() - 1));
+                                            line = reader.readLine();
+                                        }
+
+                                        PrintWriter writer = new PrintWriter(new BufferedWriter(new FileWriter(f,false)));
+                                        for (String l : lines) {
+                                            writer.println(l);
+                                        }
+
+                                        writer.flush();
+                                        writer.close();
+
+
+
+                                    } catch (Exception e) {
+                                        System.out.println("error reading files");
+                                    }
                                     System.out.println("Blocked user!");
                                     break;
                                 case 4:

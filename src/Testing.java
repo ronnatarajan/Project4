@@ -1,5 +1,7 @@
 package src;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Scanner;
 
@@ -17,8 +19,24 @@ public class Testing {
         map.put("Cat", new String[]{"Google", "Purdue"});
 
 
-        String[][] stores = map.values().toArray(new String[0][]);
-        System.out.println(stores[0][1]);
+//        String[][] stores = map.values().toArray(new String[0][]);
+//        System.out.println(stores[0][1]);
+
+        String s = "[1,2,3,4]";
+        ArrayList<String> arr = new ArrayList<>();
+        arr.add("1");
+        arr.add("2");
+        arr.add("3");
+        arr.add("4");
+
+        System.out.println(String.valueOf(arr));
+
+        String[] a = {"1", "2", "3"};
+        String as = Arrays.toString(a);
+        System.out.println(as.substring(1, as.length() - 1));
+
+
+
 
 
 
