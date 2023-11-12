@@ -52,6 +52,22 @@ public class User {
         return username;
     }
 
+    public void setBlocked(ArrayList<User> blocked) {
+        this.blocked = blocked;
+    }
+
+    public void setInvisible(ArrayList<User> invisible) {
+        this.invisible = invisible;
+    }
+
+    public ArrayList<User> getBlocked() {
+        return blocked;
+    }
+
+    public ArrayList<User> getInvisible() {
+        return invisible;
+    }
+
     /**
      * getter for password
      *

@@ -20,7 +20,21 @@ public class Parse {
             while (customerLine != null) {
                 String[] lineArr = customerLine.split(",");
                 try {
+                    String[] blocked = lineArr[2].substring(1,lineArr.length-1).split(",");
+                    String[] invisible = lineArr[3].substring(1,lineArr.length-1).split(",");
+
+                    ArrayList<User> blockedList = new ArrayList<>();
+                    ArrayList<User> invisibleList = new ArrayList<>();
+
+                    for (String i : blocked) {
+                        blockedList.add(new User(i, true));
+                    }
+                    for (String i : invisible) {
+                        invisibleList.add(new User(i, true));
+                    }
                     User user = new User(lineArr[0], lineArr[1], false);
+                    user.setBlocked(blockedList);
+                    user.setInvisible(invisibleList);
                     userList.add(user);
                 } catch(Exception e ) {
 
@@ -39,6 +53,22 @@ public class Parse {
                 String[] lineArr = sellerLine.split(",");
                 try {
                     User user = new User(lineArr[0], lineArr[1], true);
+
+                    String[] blocked = lineArr[2].substring(1,lineArr.length-1).split(",");
+                    String[] invisible = lineArr[3].substring(1,lineArr.length-1).split(",");
+
+                    ArrayList<User> blockedList = new ArrayList<>();
+                    ArrayList<User> invisibleList = new ArrayList<>();
+
+                    for (String i : blocked) {
+                        blockedList.add(new User(i, true));
+                    }
+                    for (String i : invisible) {
+                        invisibleList.add(new User(i, true));
+                    }
+
+                    user.setBlocked(blockedList);
+                    user.setInvisible(invisibleList);
                     userList.add(user);
                 } catch(Exception e) {
 
@@ -67,6 +97,7 @@ public class Parse {
             // [seller]:[b1,b2,b3,b4]}
             while (line != null) {
                 String[] arr = line.split(":")[1].split(",");
+
                 map.put(line.split(":")[0], arr);
 
                 line = reader.readLine();
