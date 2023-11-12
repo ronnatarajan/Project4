@@ -61,20 +61,21 @@ public class EditDelete {
             System.out.println("Enter new message:");
             String newMessage = input.nextLine() + " - edited";
             String[] oldMessage = lines.get(messageNum - 1).split(",");
+            String oldString = String.join(",", oldMessage);
             String recipient = oldMessage[2];
 
             String path2 = "Accounts/" + recipient + ".txt";
             File recipientMessages = new File(path2);
             Scanner reader2 = new Scanner(recipientMessages);
             ArrayList<String> lines2 = new ArrayList<String>();
-
+            
             oldMessage[1] = newMessage;
             newMessage = String.join(",", oldMessage);
             lines.set(messageNum - 1, newMessage);
 
             while(reader2.hasNextLine()) {
                 lines2.add(reader2.nextLine());
-                if (lines2.get(lines2.size()-1).equals(lines.get(messageNum - 1))) {
+                if (lines2.get(lines2.size()-1).equals(oldString)) {
                     lines2.set(lines2.size() - 1, newMessage);
                 }
             }
@@ -85,6 +86,8 @@ public class EditDelete {
             FileWriter writer = new FileWriter(f2);
             for (String i: lines) {
                 writer.write(i);
+                writer.write("\n");
+
             }
             writer.close();
 
@@ -94,6 +97,7 @@ public class EditDelete {
             FileWriter writer2 = new FileWriter(recipientMessages2);
             for (String i: lines2) {
                 writer2.write(i);
+                writer2.write("\n");
             }
             writer2.close();
 
@@ -103,5 +107,5 @@ public class EditDelete {
     } catch (Exception e) {
         e.printStackTrace();
     }
-    }   
+    }
 }
