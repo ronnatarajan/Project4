@@ -304,7 +304,6 @@ public class MainMenu {
                                     for (User user : users) {
                                         if (user.getUsername().equals(blockEmail)) {
                                             loggedIn.block(user);
-                                            System.out.println(loggedIn.getUsername() + " has blocked " + loggedIn.sizeofblocked());
                                             break;
                                         }
                                     }
