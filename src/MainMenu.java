@@ -95,6 +95,7 @@ public class MainMenu {
                     }
                     ArrayList<Message> userMessages = Parse.getMessages(email, loggedIn.isSeller(), !loggedIn.isSeller());
 
+
                     boolean exited = false;
                     while (!exited) {
                         System.out.println(mainMenu);
