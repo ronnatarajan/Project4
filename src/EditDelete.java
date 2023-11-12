@@ -17,7 +17,9 @@ public class EditDelete {
             ArrayList<String> lines = new ArrayList<String>();
             while (reader.hasNextLine()) {
                 totLines++;
-                lines.add(reader.nextLine());
+                String l = reader.nextLine();
+                lines.add(l);
+                System.out.println(totLines + ": " + l);
             }
             String answer = "n";
             // Main UI loop
@@ -50,7 +52,7 @@ public class EditDelete {
 
             writer.close();
         } catch (Exception e) {
-            e.printStackTrace();
+            System.out.println("Please Enter Correct Info");
         }
     }
     // Method to edit messages
@@ -66,7 +68,9 @@ public class EditDelete {
         ArrayList<String> lines = new ArrayList<String>();
         while (reader.hasNextLine()) {
             totLines++;
-            lines.add(reader.nextLine());
+            String l = reader.nextLine();
+            lines.add(l);
+            System.out.println(totLines + ": " + l);
         }
         String answer = "n";
         // Main UI loop
@@ -129,7 +133,7 @@ public class EditDelete {
         }
         } while(answer.equals("y"));
     } catch (Exception e) {
-        e.printStackTrace();
+        System.out.println("Please Enter Correct Info");
     }
     }
 }
