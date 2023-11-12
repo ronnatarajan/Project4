@@ -281,6 +281,12 @@ public class MainMenu {
                                                     Message m = new Message(mess, loggedIn, recipient);
                                                     userMessages.add(m);
                                                     System.out.println("Message added!");
+
+                                                    SendMessages.customerSendsMessage(
+                                                            m.getRecipient().getUsername(),
+                                                            m.getSender().getUsername(),
+                                                            m.getMessage()
+                                                    );
                                                 } catch (Exception e) {
                                                     System.out.println(e.getMessage());
                                                 }
@@ -343,7 +349,7 @@ public class MainMenu {
                                     String[][] stores = map.values().toArray(new String[0][]);
                                     System.out.println("Do you wish to message a store or a seller directly? (Enter 'store' or 'seller'");
                                     String messageType = scanner.nextLine();
-                                    if (messageType.equals("store")) {
+                                    if (messageType.equalsIgnoreCase("store")) {
                                         System.out.println("Select one of the following stores to message");
                                         StringBuilder p = new StringBuilder("{");
                                         for (String[] store : stores) {

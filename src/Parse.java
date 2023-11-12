@@ -41,7 +41,7 @@ public class Parse {
                     User user = new User(lineArr[0], lineArr[1], true);
                     userList.add(user);
                 } catch(Exception e) {
-                    
+
                 }
                 sellerLine = sellerReader.readLine();
             }
