@@ -7,7 +7,7 @@ import java.util.Date;
 
 public class SendMessages {
     public static void sellerSendsMessage(String customerEmail, String sellerEmail, String newMessage) {
-        String fileName = "Database/Accounts/CustomerAccounts/" + customerEmail + "/" + "Messages.txt";
+        String fileName = "Accounts/" + customerEmail + ".txt";
 
 
         appendMessage(fileName, newMessage, sellerEmail, customerEmail);
@@ -16,13 +16,13 @@ public class SendMessages {
 
 
         // This is to append the message to the seller's message history file as well
-        String sellerFileName = "Database/Accounts/SellerAccounts/" + sellerEmail + "/" + "Messages.txt";
+        String sellerFileName = "Accounts/" + sellerEmail + ".txt";
 
         appendMessage(sellerFileName, newMessage, sellerEmail, customerEmail);
     }
 
     public static void customerSendsMessage(String sellerEmail, String customerEmail, String newMessage) {
-        String fileName = "Database/Accounts/SellerAccounts/" + sellerEmail + "/" + "Messages.txt";
+        String fileName = "Accounts/" + sellerEmail + ".txt";
 
 
         int index = customerEmail.indexOf('@');
@@ -34,7 +34,7 @@ public class SendMessages {
 
 
         // This is to append the message to the customer's message history file as well
-        String customerFileName = "Database/Accounts/CustomerAccounts/" + customerEmail + "/" + "Messages.txt";
+        String customerFileName = "Accounts/" + customerEmail + ".txt";
 
         File customerMessageFile = new File(customerFileName);
 

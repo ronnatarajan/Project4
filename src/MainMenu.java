@@ -31,7 +31,12 @@ public class MainMenu {
     private static String mainMenu = "1. View Messages\n" +
             "2. Create Message\n" +
             "3. Block User\n" +
-            "4. Exit";
+            "4. Export Message\n" +
+            "5. Import Message\n" +
+            "6. Edit Message\n" +
+            "7. Delete Message\n" +
+            "8. Invisible\n" +
+            "9. Exit";
 
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
@@ -78,7 +83,7 @@ public class MainMenu {
                         int selection = Integer.parseInt(scanner.next());
                         scanner.nextLine();
 
-                        if (selection != 1 && selection != 2 && selection != 3 && selection != 4 && selection != 5) {
+                        if (selection < 1 || selection > 9) {
                             throw new NumberFormatException();
                         }
                         switch(selection) {
@@ -145,7 +150,7 @@ public class MainMenu {
                                         System.out.println(stores[0][0]);
                                         System.out.println("Do you wish to message a store or a seller directly? (Enter 'store' or 'seller'");
                                         String messageType = scanner.nextLine();
-                                        if (messageType.equals("store")) {
+                                        if (messageType.equalsIgnoreCase("store")) {
                                             System.out.println("Select one of the following stores to message");
                                             StringBuilder p = new StringBuilder("{");
 
@@ -216,6 +221,56 @@ public class MainMenu {
                                                 }
                                             }
 
+                                        } else if (messageType.equalsIgnoreCase("seller")) {
+                                            System.out.println("Select one of the following sellers to message");
+                                            StringBuilder p = new StringBuilder("{");
+
+                                            ArrayList<String> sellerEmails = new ArrayList<>();
+                                            for (Map.Entry<String, String[]> entry : map.entrySet()) {
+                                                sellerEmails.add(entry.getKey());
+                                            }
+
+                                            ArrayList<String> validSellers = new ArrayList<>();
+                                            for (User u : users) {
+                                                for (String e : sellerEmails) {
+                                                    if (u.getUsername().equals(e) && !loggedIn.cannotSee(u)) {
+                                                        validSellers.add(e);
+                                                    }
+                                                }
+                                            }
+
+                                            for (String seller : validSellers) {
+                                                p.append(seller).append(",");
+                                            }
+                                            p.append("}");
+                                            p.deleteCharAt(p.length() - 2);
+                                            System.out.println(p);
+
+                                            String seller = scanner.nextLine();
+                                            User recipient = null;
+                                            boolean found = false;
+                                            for (User u : users) {
+                                                if (u.getUsername().equals(seller)) {
+                                                    recipient = u;
+                                                    found = true;
+                                                }
+                                            }
+
+                                            if (!found) {
+                                                System.out.println("Please enter a valid user to message");
+                                            } else {
+                                                System.out.println("Please enter a message");
+                                                String mess = scanner.nextLine();
+
+                                                try {
+                                                    Message m = new Message(mess, loggedIn, recipient);
+                                                    userMessages.add(m);
+                                                    System.out.println("Message added!");
+                                                } catch (Exception e) {
+                                                    System.out.println(e.getMessage());
+                                                }
+                                            }
+
                                         }
 
                                     }
@@ -236,27 +291,146 @@ public class MainMenu {
                                 System.out.println("Blocked user!");
                                 break;
                             case 4:
-                                try {
-                                    PrintWriter sender = new PrintWriter(new BufferedWriter(new FileWriter("Accounts/" + loggedIn.getUsername() + ".txt", true)));
-                                    for (Message m : userMessages){
-                                        sender.println(m.getSender().getUsername() + "," + m.getMessage() + "," + m.getRecipient().getUsername());
-
-                                        PrintWriter receiver = new PrintWriter(new BufferedWriter(new FileWriter("Accounts/" + m.getRecipient().getUsername() + ".txt", true)));
-                                        receiver.println(m.getSender().getUsername() + "," + m.getMessage() + "," + m.getRecipient().getUsername());
-
-                                        receiver.flush();
-                                        receiver.close();
-                                    }
-
-                                    sender.flush();
-                                    sender.close();
-                                    exited = true;
-
-                                } catch (IOException e) {
-                                    System.out.println("CustomerAccountsList.txt does not exist!");
-                                }
+                                FileInExp.exportMessage(loggedIn.getUsername());
                                 break;
                             case 5:
+                                if (loggedIn.isSeller()) {
+                                    System.out.println("Select a Recipient:");
+                                    ArrayList<User> customers = new ArrayList<>();
+                                    StringBuilder p = new StringBuilder();
+                                    p.append("{");
+                                    for (User user : users) {
+                                        if (!user.isSeller()) {
+                                            customers.add(user);
+                                            p.append(user.getUsername()).append(",");
+
+                                        }
+                                    }
+
+                                    p.deleteCharAt(p.length()-1);
+                                    p.append("}");
+                                    System.out.println(p);
+                                    String rec = scanner.nextLine();
+                                    boolean found = false;
+
+                                    for (User user : customers) {
+                                        if (user.getUsername().equals(rec)) {
+                                            found = true;
+                                        }
+                                    }
+                                    if (!found) {
+                                        System.out.println("Please input one of the users allowed");
+                                    } else {
+                                        FileInExp.importMessage(loggedIn.getUsername(), rec, loggedIn.isSeller());
+                                    }
+                                } else {
+                                    HashMap<String, String[]> map = Parse.businesses();
+                                    String[][] stores = map.values().toArray(new String[0][]);
+                                    System.out.println("Do you wish to message a store or a seller directly? (Enter 'store' or 'seller'");
+                                    String messageType = scanner.nextLine();
+                                    if (messageType.equals("store")) {
+                                        System.out.println("Select one of the following stores to message");
+                                        StringBuilder p = new StringBuilder("{");
+                                        for (String[] store : stores) {
+                                            for (String s : store) {
+                                                p.append(s).append(", ");
+                                            }
+                                        }
+                                        p.append("}");
+                                        p.deleteCharAt(p.length()-2);
+                                        System.out.println(p);
+
+                                        String store = scanner.nextLine();
+                                        String[] arr = null;
+
+                                        for (String[] storeList : stores) {
+                                            for (String s : storeList) {
+                                                if (s.equals(store)) {
+                                                    arr = storeList;
+                                                    break;
+                                                }
+                                            }
+                                        }
+
+                                        String associatedSeller = "";
+                                        for (Map.Entry<String, String[]> entry : map.entrySet()) {
+                                            if (entry.getValue().equals(arr)) {
+                                                associatedSeller = entry.getKey();
+                                            }
+                                        }
+
+                                        String recipient = null;
+                                        for (User u: users) {
+                                            if (u.getUsername().equals(associatedSeller)) {
+                                                recipient = u.getUsername();
+                                            }
+                                        }
+                                        
+                                        if(recipient != null) {
+                                            FileInExp.importMessage(loggedIn.getUsername(), recipient, loggedIn.isSeller());
+                                        } else {
+                                            System.out.println("Please input one of the allowed stores");
+                                        }
+
+                                    } else {
+                                        System.out.println("Select a Recipient:");
+                                        ArrayList<User> customers = new ArrayList<>();
+                                        StringBuilder p = new StringBuilder();
+                                        p.append("{");
+                                        for (User user : users) {
+                                            if (user.isSeller()) {
+                                                customers.add(user);
+                                                p.append(user.getUsername()).append(",");
+
+                                            }
+                                        }
+
+                                        p.deleteCharAt(p.length()-1);
+                                        p.append("}");
+                                        System.out.println(p);
+                                        String rec = scanner.nextLine();
+                                        boolean found = false;
+
+                                        for (User user : customers) {
+                                            if (user.getUsername().equals(rec)) {
+                                                found = true;
+                                            }
+                                        }
+                                        if (!found) {
+                                            System.out.println("Please input one of the users allowed");
+                                        } else {
+                                            FileInExp.importMessage(loggedIn.getUsername(), rec, loggedIn.isSeller());
+                                        }
+                                    }
+                                }
+                                break;
+                            case 6:
+                                EditDelete.editMessage(loggedIn.getUsername(), loggedIn.isSeller());
+                                break;
+                            case 7:
+                                EditDelete.deleteMessage(loggedIn.getUsername(), loggedIn.isSeller());
+                                break;
+                            case 9:
+                                for (Message m : userMessages) {
+                                    if (m.getSender().isSeller()) {
+                                        SendMessages.sellerSendsMessage(
+                                                m.getRecipient().getUsername(),
+                                                m.getSender().getUsername(),
+                                                m.getMessage()
+                                        );
+                                    } else {
+                                        SendMessages.sellerSendsMessage(
+                                                m.getSender().getUsername(),
+                                                m.getRecipient().getUsername(),
+                                                m.getMessage()
+                                        );
+
+                                    }
+                                }
+                                exited = true;
+
+                                break;
+                            case 8:
                                 System.out.println("Name the email of the user you wish to be invisible to");
                                 String invisibleEmail = scanner.nextLine();
 

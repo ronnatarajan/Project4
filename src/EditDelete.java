@@ -8,7 +8,7 @@ public class EditDelete {
     public static void deleteMessage(String user, boolean isSeller) {
         try{
             Scanner input = new Scanner(System.in);
-            String path = (isSeller) ? "Database/Accounts/SellerAccounts/" + user + "/" + "Messages.txt": "Database/Accounts/CustomerAccounts/" + user + "/" + "Messages.txt";
+            String path = "Accounts/" + user + ".txt";
             File f = new File(path);
             Scanner reader = new Scanner(f);
             int totLines= 0;
@@ -17,14 +17,18 @@ public class EditDelete {
                 totLines++;
                 lines.add(reader.nextLine());
             }
-            String answer;
+            String answer = "n";
             do {
-                System.out.println("Enter a message to add to delete (1 - " + totLines + ")");
-                int messageNum = Integer.parseInt(input.nextLine());
-                totLines--;
-                lines.remove(messageNum - 1);
-                System.out.println("Add more messages to export? (y/n)");
-                answer = input.nextLine().toLowerCase();
+                if (totLines > 0) {
+                    System.out.println("Enter a message to add to delete (1 - " + totLines + ")");
+                    int messageNum = Integer.parseInt(input.nextLine());
+                    totLines--;
+                    lines.remove(messageNum - 1);
+                    System.out.println("Add more messages to delete? (y/n)");
+                    answer = input.nextLine().toLowerCase();
+                } else {
+                    System.out.println("No Messages To Delete!");
+                }
             } while(answer.equals("y"));
 
             f.delete();
@@ -34,6 +38,7 @@ public class EditDelete {
             FileWriter writer = new FileWriter(newFile);
             for (String i: lines) {
                 writer.write(i);
+                writer.write("\n");
             }
 
             writer.close();
@@ -45,7 +50,7 @@ public class EditDelete {
     public static void editMessage(String user, boolean isSeller) {
         try {
         Scanner input = new Scanner(System.in);
-        String path = (isSeller) ? "Database/Accounts/SellerAccounts/" + user + "/" + "Messages.txt": "Database/Accounts/CustomerAccounts/" + user + "/" + "Messages.txt";
+        String path = "Accounts/" + user + ".txt";
         File f = new File(path);
         Scanner reader = new Scanner(f);
         int totLines= 0;
@@ -61,20 +66,21 @@ public class EditDelete {
             System.out.println("Enter new message:");
             String newMessage = input.nextLine() + " - edited";
             String[] oldMessage = lines.get(messageNum - 1).split(",");
+            String oldString = String.join(",", oldMessage);
             String recipient = oldMessage[2];
 
-            String path2 = (isSeller) ? "Database/Accounts/CustomerAccounts/" + recipient + "/" + "Messages.txt": "Database/Accounts/SellerAccounts/" + recipient + "/" + "Messages.txt";
+            String path2 = "Accounts/" + recipient + ".txt";
             File recipientMessages = new File(path2);
             Scanner reader2 = new Scanner(recipientMessages);
             ArrayList<String> lines2 = new ArrayList<String>();
-
+            
             oldMessage[1] = newMessage;
             newMessage = String.join(",", oldMessage);
             lines.set(messageNum - 1, newMessage);
 
             while(reader2.hasNextLine()) {
                 lines2.add(reader2.nextLine());
-                if (lines2.get(lines2.size()-1).equals(lines.get(messageNum - 1))) {
+                if (lines2.get(lines2.size()-1).equals(oldString)) {
                     lines2.set(lines2.size() - 1, newMessage);
                 }
             }
@@ -85,6 +91,8 @@ public class EditDelete {
             FileWriter writer = new FileWriter(f2);
             for (String i: lines) {
                 writer.write(i);
+                writer.write("\n");
+
             }
             writer.close();
 
@@ -94,6 +102,7 @@ public class EditDelete {
             FileWriter writer2 = new FileWriter(recipientMessages2);
             for (String i: lines2) {
                 writer2.write(i);
+                writer2.write("\n");
             }
             writer2.close();
 
@@ -103,5 +112,5 @@ public class EditDelete {
     } catch (Exception e) {
         e.printStackTrace();
     }
-    }   
+    }
 }
