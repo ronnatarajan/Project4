@@ -280,6 +280,12 @@ public class MainMenu {
                                                         Message m = new Message(mess, loggedIn, recipient);
                                                         userMessages.add(m);
                                                         System.out.println("Message added!");
+
+                                                        SendMessages.customerSendsMessage(
+                                                                m.getRecipient().getUsername(),
+                                                                m.getSender().getUsername(),
+                                                                m.getMessage()
+                                                        );
                                                     } catch (Exception e) {
                                                         System.out.println(e.getMessage());
                                                     }
