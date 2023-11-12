@@ -12,6 +12,7 @@ public class User {
 
     private ArrayList<User> blocked;
 
+    private ArrayList<User> invisible;
 
     /**
      * initialize User object
@@ -24,7 +25,10 @@ public class User {
         this.password = password;
         this.seller = seller;
         this.blocked = new ArrayList<>();
+        this.invisible = new ArrayList<>();
     }
+
+
 
     public int sizeofblocked() {
         return this.blocked.size();
@@ -34,6 +38,8 @@ public class User {
         this.username = username;
         this.seller = seller;
         this.blocked = new ArrayList<>();
+        this.invisible = new ArrayList<>();
+
     }
 
 
@@ -55,6 +61,13 @@ public class User {
         return password;
     }
 
+    public boolean cannotSee(User user) {
+        return this.invisible.contains(user);
+    }
+
+    public void makeInvisible(User user) {
+        user.invisible.add(this);
+    }
     /**
      * validate password
      * @param password String
@@ -104,5 +117,13 @@ public class User {
     @Override
     public int hashCode() {
         return Objects.hash(username, password, seller, blocked);
+    }
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "username='" + username + '\'' +
+                ", password='" + password + '\'' +
+                '}';
     }
 }

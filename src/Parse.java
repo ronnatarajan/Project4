@@ -34,10 +34,11 @@ public class Parse {
                 String[] lineArr = sellerLine.split(",");
                 User user = new User(lineArr[0], lineArr[1], true);
                 userList.add(user);
-
-                sellerLine = customerReader.readLine();
+                sellerLine = sellerReader.readLine();
             }
 
+            customerReader.close();
+            sellerReader.close();
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
