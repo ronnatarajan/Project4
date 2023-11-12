@@ -24,7 +24,7 @@ public class EditDelete {
                     int messageNum = Integer.parseInt(input.nextLine());
                     totLines--;
                     lines.remove(messageNum - 1);
-                    System.out.println("Add more messages to export? (y/n)");
+                    System.out.println("Add more messages to delete? (y/n)");
                     answer = input.nextLine().toLowerCase();
                 } else {
                     System.out.println("No Messages To Delete!");
