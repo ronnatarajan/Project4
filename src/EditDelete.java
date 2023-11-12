@@ -17,14 +17,18 @@ public class EditDelete {
                 totLines++;
                 lines.add(reader.nextLine());
             }
-            String answer;
+            String answer = "n";
             do {
-                System.out.println("Enter a message to add to delete (1 - " + totLines + ")");
-                int messageNum = Integer.parseInt(input.nextLine());
-                totLines--;
-                lines.remove(messageNum - 1);
-                System.out.println("Add more messages to export? (y/n)");
-                answer = input.nextLine().toLowerCase();
+                if (totLines > 0) {
+                    System.out.println("Enter a message to add to delete (1 - " + totLines + ")");
+                    int messageNum = Integer.parseInt(input.nextLine());
+                    totLines--;
+                    lines.remove(messageNum - 1);
+                    System.out.println("Add more messages to export? (y/n)");
+                    answer = input.nextLine().toLowerCase();
+                } else {
+                    System.out.println("No Messages To Delete!");
+                }
             } while(answer.equals("y"));
 
             f.delete();
@@ -34,6 +38,7 @@ public class EditDelete {
             FileWriter writer = new FileWriter(newFile);
             for (String i: lines) {
                 writer.write(i);
+                writer.write("\n");
             }
 
             writer.close();
