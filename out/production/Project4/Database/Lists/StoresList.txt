@@ -1,2 +1,1 @@
-testseller@gmail.com:Store1,Store2
-testseller123:Store1,Store2
+p:Google,Apple

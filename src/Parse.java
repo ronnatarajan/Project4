@@ -78,24 +78,48 @@ public class Parse {
             while (sellerLine != null) {
                 String[] lineArr = sellerLine.split(",");
                 try {
-                    User user = new User(lineArr[0], lineArr[1], true);
+                    if (lineArr[2].equals("[]") && lineArr[3].equals("[]")) {
+                        User user = new User(lineArr[0], lineArr[1], false);
+                        userList.add(user);
+                    } else {
+                        if (!lineArr[2].equals("[]") && lineArr[3].equals("[]")) {
+                            String[] blocked = lineArr[2].substring(1, lineArr.length - 1).split(",");
+                            ArrayList<User> blockedList = new ArrayList<>();
+                            for (String i : blocked) {
+                                blockedList.add(new User(i, true));
+                            }
+                            User user = new User(lineArr[0], lineArr[1], false);
+                            user.setBlocked(blockedList);
+                            userList.add(user);
 
-                    String[] blocked = lineArr[2].substring(1,lineArr.length-1).split(",");
-                    String[] invisible = lineArr[3].substring(1,lineArr.length-1).split(",");
+                        } else if (lineArr[2].equals("[]") && !lineArr[3].equals("[]")) {
+                            String[] invisible = lineArr[3].substring(1, lineArr.length - 1).split(",");
+                            ArrayList<User> invisibleList = new ArrayList<>();
+                            for (String i : invisible) {
+                                invisibleList.add(new User(i, true));
+                            }
+                            User user = new User(lineArr[0], lineArr[1], false);
+                            user.setInvisible(invisibleList);
+                            userList.add(user);
+                        } else  {
+                            String[] blocked = lineArr[2].substring(1, lineArr.length - 1).split(",");
+                            String[] invisible = lineArr[3].substring(1, lineArr.length - 1).split(",");
 
-                    ArrayList<User> blockedList = new ArrayList<>();
-                    ArrayList<User> invisibleList = new ArrayList<>();
+                            ArrayList<User> blockedList = new ArrayList<>();
+                            ArrayList<User> invisibleList = new ArrayList<>();
 
-                    for (String i : blocked) {
-                        blockedList.add(new User(i, true));
+                            for (String i : blocked) {
+                                blockedList.add(new User(i, true));
+                            }
+                            for (String i : invisible) {
+                                invisibleList.add(new User(i, true));
+                            }
+                            User user = new User(lineArr[0], lineArr[1], false);
+                            user.setBlocked(blockedList);
+                            user.setInvisible(invisibleList);
+                            userList.add(user);
+                        }
                     }
-                    for (String i : invisible) {
-                        invisibleList.add(new User(i, true));
-                    }
-
-                    user.setBlocked(blockedList);
-                    user.setInvisible(invisibleList);
-                    userList.add(user);
                 } catch(Exception e) {
 
                 }

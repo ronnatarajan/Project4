@@ -1,3 +1,1 @@
-testseller@gmail.com,1,[],[]
-testseller123,1,[],[]
-newseller@example.com,sellerpassword789,[],[]
+p,,[],[]
