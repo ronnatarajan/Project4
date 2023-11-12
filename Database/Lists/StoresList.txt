@@ -1,2 +1,2 @@
-newseller@gmail.com:Store1,Store2
-Test3:Store1,Store2
+
+testseller@gmail.com:Store1,Store2
