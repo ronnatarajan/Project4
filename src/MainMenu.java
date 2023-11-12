@@ -133,7 +133,6 @@ public class MainMenu {
                                             System.out.println("Please type in a message");
                                             String m = scanner.nextLine();
 
-                                            System.out.println(recipient.getUsername() + " has blocked " + recipient.sizeofblocked());
                                             try {
                                                 Message message = new Message(m, loggedIn, recipient);
                                                 userMessages.add(message);
@@ -158,8 +157,7 @@ public class MainMenu {
                                         //customer implementation
                                         HashMap<String, String[]> map = Parse.businesses();
                                         String[][] stores = map.values().toArray(new String[0][]);
-                                        System.out.println(stores[0][0]);
-                                        System.out.println("Do you wish to message a store or a seller directly? (Enter 'store' or 'seller'");
+                                        System.out.println("Do you wish to message a store or a seller directly? (Enter 'store' or 'seller')");
                                         String messageType = scanner.nextLine();
                                         if (messageType.equalsIgnoreCase("store")) {
                                             System.out.println("Select one of the following stores to message");
