@@ -138,6 +138,17 @@ public class MainMenu {
                                                 Message message = new Message(m, loggedIn, recipient);
                                                 userMessages.add(message);
                                                 System.out.println("Message added!");
+
+
+
+                                                SendMessages.sellerSendsMessage(
+                                                        message.getSender().getUsername(),
+                                                        message.getRecipient().getUsername(),
+                                                        message.getMessage()
+                                                );
+
+
+
                                             } catch (Exception e) {
                                                 System.out.println(e.getMessage());
                                             }
@@ -216,6 +227,12 @@ public class MainMenu {
                                                     Message m = new Message(mess, loggedIn, recipient);
                                                     userMessages.add(m);
                                                     System.out.println("Message added!");
+
+                                                    SendMessages.customerSendsMessage(
+                                                            m.getRecipient().getUsername(),
+                                                            m.getSender().getUsername(),
+                                                            m.getMessage()
+                                                    );
                                                 } catch (Exception e) {
                                                     System.out.println(e.getMessage());
                                                 }
@@ -411,22 +428,6 @@ public class MainMenu {
                                 EditDelete.deleteMessage(loggedIn.getUsername(), loggedIn.isSeller());
                                 break;
                             case 9:
-                                for (Message m : userMessages) {
-                                    if (m.getSender().isSeller()) {
-                                        SendMessages.sellerSendsMessage(
-                                                m.getRecipient().getUsername(),
-                                                m.getSender().getUsername(),
-                                                m.getMessage()
-                                        );
-                                    } else {
-                                        SendMessages.sellerSendsMessage(
-                                                m.getSender().getUsername(),
-                                                m.getRecipient().getUsername(),
-                                                m.getMessage()
-                                        );
-
-                                    }
-                                }
                                 exited = true;
 
                                 break;
