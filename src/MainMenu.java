@@ -342,7 +342,7 @@ public class MainMenu {
                                         String[][] stores = map.values().toArray(new String[0][]);
                                         System.out.println("Do you wish to message a store or a seller directly? (Enter 'store' or 'seller'");
                                         String messageType = scanner.nextLine();
-                                        if (messageType.equals("store")) {
+                                        if (messageType.equalsIgnoreCase("store")) {
                                             System.out.println("Select one of the following stores to message");
                                             StringBuilder p = new StringBuilder("{");
                                             for (String[] store : stores) {
@@ -386,7 +386,7 @@ public class MainMenu {
                                                 System.out.println("Please input one of the allowed stores");
                                             }
 
-                                        } else {
+                                        } else if (messageType.equalsIgnoreCase("seller")) {
                                             System.out.println("Select a Recipient:");
                                             ArrayList<User> customers = new ArrayList<>();
                                             StringBuilder p = new StringBuilder();
@@ -498,7 +498,7 @@ public class MainMenu {
                                 break;
                             } else {
                                 System.out.println(signUpThankYou);
-                                MainMenu.main(null);
+                                break;
                             }
                         }
                         if (response.equals("s")) {
@@ -510,7 +510,7 @@ public class MainMenu {
                                 String stores = scanner.nextLine();
                                 Stores.appendStores(stores, email);
                                 System.out.println(signUpThankYou);
-                                MainMenu.main(null);
+                                break;
                             }
                         }
                     }
