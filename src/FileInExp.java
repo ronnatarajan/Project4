@@ -12,7 +12,7 @@ public class FileInExp {
         try {
             File f = new File(path);
             System.out.println("Enter Path For Export to be Saved to:");
-            File export = new File(input.nextLine());
+            File export = new File(input.nextLine() + "-export.csv");
             export.createNewFile();
             FileWriter writer = new FileWriter(export);
             Scanner reader = new Scanner(f);
