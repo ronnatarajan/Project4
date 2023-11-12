@@ -21,7 +21,6 @@ public class Parse {
                     if (lineArr[2].equals("[]") && lineArr[3].equals("[]")) {
                         User user = new User(lineArr[0], lineArr[1], false);
                         userList.add(user);
-                        System.out.println("alsdfkljahsdf");
                     } else {
                         if (!lineArr[2].equals("[]") && lineArr[3].equals("[]")) {
                             String[] blocked = lineArr[2].substring(1, lineArr.length - 1).split(",");
