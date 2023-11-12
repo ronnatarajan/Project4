@@ -18,8 +18,12 @@ public class Parse {
             //loop through customer file and populate list with all users that are customers
             while (customerLine != null) {
                 String[] lineArr = customerLine.split(",");
-                User user = new User(lineArr[0], lineArr[1], false);
-                userList.add(user);
+                try {
+                    User user = new User(lineArr[0], lineArr[1], false);
+                    userList.add(user);
+                } catch(Exception e ) {
+                    
+                }
 
                 customerLine = customerReader.readLine();
             }
