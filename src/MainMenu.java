@@ -72,6 +72,25 @@ public class MainMenu {
                             loggedIn = user;
                         }
                     }
+
+                    try {
+                        Scanner checkMessages = new Scanner(new File("Database/Lists/UserSizes.txt"));
+                        Scanner getLines = new Scanner(new File("Accounts/" + loggedIn.getUsername() + ".txt"));
+                        int totLines = 0;
+                        while (getLines.hasNextLine()) {
+                            totLines++;
+                            getLines.nextLine();
+                        }
+                        while (checkMessages.hasNextLine()) {
+                            String[] l = checkMessages.nextLine().split(",");
+                            if (l[0].equals(loggedIn.getUsername()) && Integer.parseInt(l[1]) != totLines) {
+                                System.out.println("You have new messages!");
+                                break;
+                            }
+                        }
+                    } catch (Exception e) {
+                        System.out.println("Failed to check for new messages");
+                    }
                     ArrayList<Message> userMessages = Parse.getMessages(email, loggedIn.isSeller(), !loggedIn.isSeller());
 
                     boolean exited = false;
@@ -473,7 +492,39 @@ public class MainMenu {
                                     break;
                                 case 9:
                                     exited = true;
+                                    try {
+                                        Scanner checkLines = new Scanner(new File("Accounts/" + loggedIn.getUsername() + ".txt"));
+                                        int totLines = 0;
+                                        ArrayList<String> lines = new ArrayList<String>();
+                                        while (checkLines.hasNextLine()) {
+                                            totLines++;
+                                        }
+                                        File f = new File("Database/Lists/UserSizes.txt");
+                                        Scanner readLines = new Scanner(f);
+                                        boolean inFile = false;
+                                        while (readLines.hasNextLine()) {
+                                            String l = readLines.nextLine();
+                                            lines.add(l);
+                                            String[] parsed = l.split(",");
+                                            if (parsed[0].equals(loggedIn.getUsername())) {
+                                                inFile = true;
+                                                lines.set(lines.size()-1, loggedIn.getUsername() + "," + totLines);
+                                            }
+                                        }
+                                        if (!inFile) {
+                                            lines.add(loggedIn.getUsername() + "," + totLines);
+                                        }
+                                        f.delete();
+                                        File f2 = new File("Database/Lists/UserSizes.txt");
+                                        PrintWriter writer = new PrintWriter(f2);
+                                        for (String i: lines) {
+                                            writer.write(i + "\n");
+                                        }
+                                        writer.close();
 
+                                    } catch (Exception e) {
+                                        System.out.println("Invalid File While Exiting");
+                                    }
                                     break;
                                 case 8:
                                     System.out.println("Name the email of the user you wish to be invisible to");

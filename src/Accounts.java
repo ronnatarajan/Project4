@@ -56,11 +56,13 @@ public class Accounts {
             File f = new File("Accounts/" + customerEmail + ".txt");
             f.createNewFile();
 
+            System.out.println("came here");
+
             printWriter.flush();
             printWriter.close();
 
         } catch (IOException e) {
-            System.out.println("CustomerAccountsList.txt does not exist!");
+            System.out.println(e.getMessage());
         }
 
         return "Customer account can be created";
