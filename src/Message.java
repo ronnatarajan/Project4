@@ -54,6 +54,6 @@ public class Message {
 
     @Override
     public String toString() {
-        return "Sender: " + sender.getUsername() + "; message: " + this.message + "; recipient" + recipient.getUsername();
+        return "Sender: " + sender.getUsername() + "; Message: " + this.message + "; Recipient: " + recipient.getUsername();
     }
 }
