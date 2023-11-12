@@ -26,7 +26,9 @@ public class FileInExp {
             // and to cache them to write to the csv later
             while (reader.hasNextLine()) {
                 totLines++;
-                lines.add(reader.nextLine());
+                String l = reader.nextLine();
+                lines.add(l);
+                System.out.println(totLines + ": " + l);
             }
             String answer;
             do {

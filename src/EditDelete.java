@@ -17,7 +17,9 @@ public class EditDelete {
             ArrayList<String> lines = new ArrayList<String>();
             while (reader.hasNextLine()) {
                 totLines++;
-                lines.add(reader.nextLine());
+                String l = reader.nextLine();
+                lines.add(l);
+                System.out.println(totLines + ": " + l);
             }
             String answer = "n";
             // Main UI loop
@@ -66,7 +68,9 @@ public class EditDelete {
         ArrayList<String> lines = new ArrayList<String>();
         while (reader.hasNextLine()) {
             totLines++;
-            lines.add(reader.nextLine());
+            String l = reader.nextLine();
+            lines.add(l);
+            System.out.println(totLines + ": " + l);
         }
         String answer = "n";
         // Main UI loop
