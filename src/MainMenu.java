@@ -333,7 +333,7 @@ public class MainMenu {
                                 EditDelete.editMessage(loggedIn.getUsername(), loggedIn.isSeller());
                                 break;
                             case 7:
-                                EditDelete.editMessage(loggedIn.getUsername(), loggedIn.isSeller());
+                                EditDelete.deleteMessage(loggedIn.getUsername(), loggedIn.isSeller());
                                 break;
                             case 8:
                                 try {
