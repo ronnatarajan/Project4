@@ -77,8 +77,13 @@ public class User {
         return password;
     }
 
-    public boolean cannotSee(User user) {
-        return this.invisible.contains(user);
+    public boolean canSee(User user) {
+        for (User u : invisible) {
+            if (u.getUsername().equals(user.getUsername())) {
+                return false;
+            }
+        }
+        return true;
     }
 
     public void makeInvisible(User user) {
@@ -113,7 +118,12 @@ public class User {
      * @return true if current user has blocked another
      */
     public boolean hasBlocked(User user) {
-        return this.blocked.contains(user);
+        for (User u : blocked) {
+            if (u.getUsername().equals(user.getUsername())) {
+                return true;
+            }
+        }
+        return false;
     }
 
 

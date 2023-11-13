@@ -1,4 +1,2 @@
-p,1,[],[]
-r,1,[],[]
-testbuyer123,1,[],[]
-newcustomer@example.com,newpassword456,[],[]
+r,1,[o],[o]
+u,1,[o],[]

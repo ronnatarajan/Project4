@@ -2,6 +2,7 @@ package src;
 
 import java.io.*;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 
 public class Parse {
@@ -23,7 +24,7 @@ public class Parse {
                         userList.add(user);
                     } else {
                         if (!lineArr[2].equals("[]") && lineArr[3].equals("[]")) {
-                            String[] blocked = lineArr[2].substring(1, lineArr.length - 1).split(",");
+                            String[] blocked = lineArr[2].substring(1, lineArr.length - 2).split(",");
                             ArrayList<User> blockedList = new ArrayList<>();
                             for (String i : blocked) {
                                 blockedList.add(new User(i, true));
@@ -33,7 +34,7 @@ public class Parse {
                             userList.add(user);
 
                         } else if (lineArr[2].equals("[]") && !lineArr[3].equals("[]")) {
-                            String[] invisible = lineArr[3].substring(1, lineArr.length - 1).split(",");
+                            String[] invisible = lineArr[3].substring(1, lineArr.length - 2).split(",");
                             ArrayList<User> invisibleList = new ArrayList<>();
                             for (String i : invisible) {
                                 invisibleList.add(new User(i, true));
@@ -42,8 +43,9 @@ public class Parse {
                             user.setInvisible(invisibleList);
                             userList.add(user);
                         } else  {
-                            String[] blocked = lineArr[2].substring(1, lineArr.length - 1).split(",");
-                            String[] invisible = lineArr[3].substring(1, lineArr.length - 1).split(",");
+                            String[] blocked = lineArr[2].substring(1, lineArr.length - 2).split(",");
+                            String[] invisible = lineArr[3].substring(1, lineArr.length - 2).split(",");
+
 
                             ArrayList<User> blockedList = new ArrayList<>();
                             ArrayList<User> invisibleList = new ArrayList<>();
