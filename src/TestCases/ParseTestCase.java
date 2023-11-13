@@ -7,6 +7,16 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.Map;
 
+/**
+ * Project 4 -- Messaging System
+ *
+ *  CLASS DESCRIPTION
+ *
+ * @author NAME, lab sec 23
+ *
+ * @version November 13, 2023
+ */
+
 public class ParseTestCase {
     public static void main(String[] args) {
         // getUsers Test Case
@@ -38,6 +48,5 @@ public class ParseTestCase {
 //
 //        System.out.println("\ngetMessages Test Class");
 //        System.out.println(Parse.getMessages(email, senderIsSeller, recepientIsSeller));
-        //hello
     }
 }
