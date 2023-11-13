@@ -1,7 +1,7 @@
 # # Project4
 ### Compiling
 To compile the project, simply run MainMenu.java and follow instructions prompted.
-<br/>** import src is in our GitHub workspace because IntelliJ would not let use directories. Only packages. In Vocareum, we removed import src.
+<br/>** import src is in our GitHub workspace because IntelliJ would not let us use directories, only packages. In Vocareum, we removed import src.
 ### Submissions
 Ryan - Submitted report on Brightspace  
 Josh - Submitted Vocareum workspace
