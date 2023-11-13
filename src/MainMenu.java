@@ -599,7 +599,7 @@ public class MainMenu {
                                 break;
                             } else {
                                 System.out.println(signUpThankYou);
-                                break;
+                                MainMenu.main(null);
                             }
                         }
                         if (response.equals("s")) {
@@ -611,7 +611,7 @@ public class MainMenu {
                                 String stores = scanner.nextLine();
                                 Stores.appendStores(stores, email);
                                 System.out.println(signUpThankYou);
-                                break;
+                                MainMenu.main(null);
                             }
                         }
                     }
