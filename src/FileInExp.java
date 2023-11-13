@@ -8,9 +8,9 @@ import java.io.*;
 /**
  * Project 4 -- Messaging System
  *
- *  CLASS DESCRIPTION
+ *  Class to implement methods for importing text to conversations and exporting conversations
  *
- * @author NAME, lab sec 23
+ * @author Ryan Kenney, lab sec 23
  *
  * @version November 13, 2023
  */
