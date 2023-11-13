@@ -626,15 +626,16 @@ public class MainMenu {
                                     break;
                             }
                         } catch (NumberFormatException e) {
-                            System.out.println("Please input a number (1,2, or 3) to select one of the given options");
+                            System.out.println("Please input a number (1,-9) to select one of the given options");
                         }
                     }
                 } else if (userChoice == 2) {
-                    boolean run = true;
-                    while (run) {
+                    while (true) {
+                        //prompts user to sign up as either a buyer or seller
                         System.out.println(signUpBuyerOrSeller);
                         String response = scanner.nextLine().toLowerCase().trim();
 
+                        //if the user response doesn't equal a valid option, loop until a correct option is chosen
                         if (!response.equals("b") && !response.equals("s")) {
                             isWrong = true;
                             while (isWrong) {
@@ -646,14 +647,18 @@ public class MainMenu {
                                 }
                             }
                         }
+                        //after user inputs either buyer or seller, email and password is prompted
                         System.out.println(emailPrompt);
                         String email = scanner.nextLine();
                         System.out.println(passwordPrompt);
                         String password = scanner.nextLine();
 
+                        //prompts to user to verify their password
                         System.out.println(passwordVerifyPrompt);
                         String verifiedPassword = scanner.nextLine();
 
+
+                        //if the verified password doesn't match the original password, enter a loop until they match
                         if (!verifiedPassword.equals(password)) {
                             passwordMatchCheck = true;
                             while (passwordMatchCheck) {
@@ -667,35 +672,48 @@ public class MainMenu {
                             }
                         }
                         if (response.equals("b")) {
+                            //add account to buyer list
                             String addCustomerAccount = Accounts.addCustomerAccount(email, password);
+                            //if the account already exists, just break out of sign up loop
                             if (addCustomerAccount.contains("Customer account already exists")) {
+                                MainMenu.main(null);
                                 break;
                             } else {
+                                //prompts a thank you, then exists
                                 System.out.println(signUpThankYou);
                                 MainMenu.main(null);
                                 break;
                             }
                         }
                         if (response.equals("s")) {
+                            //add account to buyer list
                             String addSellerAccount = Accounts.addSellerAccount(email, password);
+                            //if the account already exists, just break out of sign up loop
                             if (addSellerAccount.contains("Seller account already exists!")) {
+                                MainMenu.main(null);
                                 break;
                             } else {
+                                //prompts the store owner what stores are under their name, seperated by a comma
                                 System.out.println(storesPrompt);
                                 String stores = scanner.nextLine();
                                 Stores.appendStores(stores, email);
+
+                                //prompts a thank you, then goes back to main menu
                                 System.out.println(signUpThankYou);
                                 MainMenu.main(null);
                                 break;
                             }
                         }
                     }
+                    // if the user inputs 3 in the first menu, exit program
                 } else if (userChoice == 3) {
                     System.out.println(farewellMessage);
                     isRunning = false;
                 } else {
+                    // if the user input is greater than 3 or less than one, print error then loop back to menu
                     System.out.println(errorValidInput);
                 }
+                //if the user enters a string instead of a number, print error then loop back to menu
             } catch (InputMismatchException e) {
                 System.out.println(errorValidInput);
                 scanner.nextLine();
