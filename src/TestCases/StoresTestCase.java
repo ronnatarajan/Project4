@@ -1,9 +1,21 @@
-package src;
+package src.TestCases;
+
+import src.Stores;
 
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
+
+/**
+ * Project 4 -- Messaging System
+ *
+ *  CLASS DESCRIPTION
+ *
+ * @author NAME, lab sec 23
+ *
+ * @version November 13, 2023
+ */
 
 public class StoresTestCase {
     public static void main(String[] args) {
@@ -20,6 +32,7 @@ public class StoresTestCase {
         appendStoresTestCase(stores, sellerEmail);
     }
 
+    // appendStores Test Case
     public static void appendStoresTestCase(String stores, String sellerEmail) {
         System.out.println("appendStores Test Case");
 

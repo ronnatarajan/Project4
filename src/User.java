@@ -3,6 +3,16 @@ package src;
 import java.util.ArrayList;
 import java.util.Objects;
 
+/**
+ * Project 4 -- Messaging System
+ *
+ *  CLASS DESCRIPTION
+ *
+ * @author NAME, lab sec 23
+ *
+ * @version November 13, 2023
+ */
+
 public class User {
     //username and password
     private String username;
