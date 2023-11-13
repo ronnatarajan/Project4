@@ -7,6 +7,16 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 
+/**
+ * Project 4 -- Messaging System
+ *
+ *  CLASS DESCRIPTION
+ *
+ * @author NAME, lab sec 23
+ *
+ * @version November 13, 2023
+ */
+
 public class StoresTestCase {
     public static void main(String[] args) {
 
@@ -59,6 +69,5 @@ public class StoresTestCase {
 
         System.out.println("\nRemember to delete the following lines in the StoresList.txt file and leave an extra empty line!" +
                 "\n" + sellerEmail + ":" + stores);
-        //hello
     }
 }
