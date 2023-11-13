@@ -372,13 +372,17 @@ public class MainMenu {
                                     System.out.println("Blocked user!");
                                     break;
                                 case 4:
+                                    // Call to handle exporting messages
                                     FileInExp.exportMessage(loggedIn.getUsername());
                                     break;
                                 case 5:
+                                    // Case for sending imported messages
+                                    // Seller case
                                     if (loggedIn.isSeller()) {
                                         System.out.println("Select a Recipient:");
                                         ArrayList<User> customers = new ArrayList<>();
                                         StringBuilder p = new StringBuilder();
+                                        // Gets all users to message
                                         p.append("{");
                                         for (User user : users) {
                                             if (!user.isSeller()) {
@@ -393,25 +397,29 @@ public class MainMenu {
                                         System.out.println(p);
                                         String rec = scanner.nextLine();
                                         boolean found = false;
-
+                                        // Checks if inputed user is valid
                                         for (User user : customers) {
                                             if (user.getUsername().equals(rec)) {
                                                 found = true;
                                             }
                                         }
+                                        // if found runs import message method
                                         if (!found) {
                                             System.out.println("Please input one of the users allowed");
                                         } else {
                                             FileInExp.importMessage(loggedIn.getUsername(), rec, loggedIn.isSeller());
                                         }
+                                    // case for customer implementation
                                     } else {
                                         HashMap<String, String[]> map = Parse.businesses();
                                         String[][] stores = map.values().toArray(new String[0][]);
+                                        // check if they want to message a seller or a customer directly
                                         System.out.println("Do you wish to message a store or a seller directly? (Enter 'store' or 'seller'");
                                         String messageType = scanner.nextLine();
                                         if (messageType.equalsIgnoreCase("store")) {
                                             System.out.println("Select one of the following stores to message");
                                             StringBuilder p = new StringBuilder("{");
+                                            // Shows available sotres to message
                                             for (String[] store : stores) {
                                                 for (String s : store) {
                                                     p.append(s).append(", ");
@@ -420,7 +428,7 @@ public class MainMenu {
                                             p.append("}");
                                             p.deleteCharAt(p.length() - 2);
                                             System.out.println(p);
-
+                                            // Gets inputed seller from possible list
                                             String store = scanner.nextLine();
                                             String[] arr = null;
 
@@ -439,25 +447,26 @@ public class MainMenu {
                                                     associatedSeller = entry.getKey();
                                                 }
                                             }
-
+                                            // Checks if the inputed store was valid
                                             String recipient = null;
                                             for (User u : users) {
                                                 if (u.getUsername().equals(associatedSeller)) {
                                                     recipient = u.getUsername();
                                                 }
                                             }
-
+                                            // if the store is valid, runs the import message method
                                             if (recipient != null) {
                                                 FileInExp.importMessage(loggedIn.getUsername(), recipient, loggedIn.isSeller());
                                             } else {
                                                 System.out.println("Please input one of the allowed stores");
                                             }
-
+                                        // Messaging seller case
                                         } else if (messageType.equalsIgnoreCase("seller")) {
                                             System.out.println("Select a Recipient:");
                                             ArrayList<User> customers = new ArrayList<>();
                                             StringBuilder p = new StringBuilder();
                                             p.append("{");
+                                            // Gets a list of all sellers to message
                                             for (User user : users) {
                                                 if (user.isSeller()) {
                                                     customers.add(user);
@@ -471,12 +480,13 @@ public class MainMenu {
                                             System.out.println(p);
                                             String rec = scanner.nextLine();
                                             boolean found = false;
-
+                                            // Checks if the inputed seller is valid
                                             for (User user : customers) {
                                                 if (user.getUsername().equals(rec)) {
                                                     found = true;
                                                 }
                                             }
+                                            // If the seller is valid, run the import message method
                                             if (!found) {
                                                 System.out.println("Please input one of the users allowed");
                                             } else {
@@ -486,10 +496,12 @@ public class MainMenu {
                                     }
                                     break;
                                 case 6:
+                                    // Runs the edit message method and updates the messages
                                     EditDelete.editMessage(loggedIn.getUsername(), loggedIn.isSeller());
                                     userMessages = Parse.getMessages(email, loggedIn.isSeller(), !loggedIn.isSeller());
                                     break;
                                 case 7:
+                                    // Runs the delete message method
                                     EditDelete.deleteMessage(loggedIn.getUsername(), loggedIn.isSeller());
                                     break;
                                 case 9:
