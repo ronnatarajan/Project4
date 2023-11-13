@@ -1,8 +1,6 @@
 package src;
 
-import java.awt.desktop.UserSessionEvent;
 import java.io.*;
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Scanner;
@@ -329,7 +327,6 @@ public class MainMenu {
                                     for (User user : users) {
                                         if (user.getUsername().equals(blockEmail)) {
                                             loggedIn.block(user);
-                                            System.out.println(loggedIn.getUsername() + " has blocked " + loggedIn.sizeofblocked());
                                             break;
                                         }
                                     }
@@ -657,6 +654,7 @@ public class MainMenu {
                                 break;
                             } else {
                                 System.out.println(signUpThankYou);
+                                MainMenu.main(null);
                                 break;
                             }
                         }
@@ -669,6 +667,7 @@ public class MainMenu {
                                 String stores = scanner.nextLine();
                                 Stores.appendStores(stores, email);
                                 System.out.println(signUpThankYou);
+                                MainMenu.main(null);
                                 break;
                             }
                         }

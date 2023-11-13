@@ -24,7 +24,6 @@ public class Message {
         }
 
         if (recipient.hasBlocked(sender)) {
-            System.out.println("threw exception");
             throw new InvalidMessageException("You have been blocked");
         }
         this.message = message;
