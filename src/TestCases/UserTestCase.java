@@ -4,6 +4,16 @@ import src.User;
 
 import java.util.ArrayList;
 
+/**
+ * Project 4 -- Messaging System
+ *
+ *  CLASS DESCRIPTION
+ *
+ * @author NAME, lab sec 23
+ *
+ * @version November 13, 2023
+ */
+
 public class UserTestCase {
     public static void main(String[] args) {
         // Test Data
@@ -73,6 +83,6 @@ public class UserTestCase {
         }
 
 
-//hello
+
     }
 }
