@@ -14,7 +14,12 @@ import java.io.*;
  */
 
 public class EditDelete {
-    // Method for deleting messages
+    // 
+    /**
+     * @param user
+     * @param isSeller
+     * Method for deleting messages
+     */
     public static void deleteMessage(String user, boolean isSeller) {
         try{
             Scanner input = new Scanner(System.in);
@@ -66,7 +71,12 @@ public class EditDelete {
             System.out.println("Please Enter Correct Info");
         }
     }
-    // Method to edit messages
+    // 
+    /**
+     * @param user
+     * @param isSeller
+     * Method to edit messages
+     */
     public static void editMessage(String user, boolean isSeller) {
         try {
         Scanner input = new Scanner(System.in);
