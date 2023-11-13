@@ -10,12 +10,17 @@ import java.util.HashMap;
  *
  *  CLASS DESCRIPTION
  *
- * @author NAME, lab sec 23
+ * @author Ron Natarajan, lab sec 23
  *
  * @version November 13, 2023
  */
 
 public class Parse {
+
+    /**
+     * parse CustomerAccountsList and SellerAccountsList and get a list of Users
+     * @return ArrayList<User>
+     */
     public static ArrayList<User> getUsers() {
         ArrayList<User> userList = new ArrayList<>();
 
@@ -29,10 +34,12 @@ public class Parse {
             while (customerLine != null) {
                 String[] lineArr = customerLine.split(",");
                 try {
+                    //if blocking lists and invisible lists are empty, we don't need to update them
                     if (lineArr[2].equals("[]") && lineArr[3].equals("[]")) {
                         User user = new User(lineArr[0], lineArr[1], false);
                         userList.add(user);
                     } else {
+                        //if blocking isn't empty, we need to parse it and update the user's blocking attribute
                         if (!lineArr[2].equals("[]") && lineArr[3].equals("[]")) {
                             String[] blocked = lineArr[2].substring(1, lineArr.length - 2).split(",");
                             ArrayList<User> blockedList = new ArrayList<>();
@@ -44,6 +51,7 @@ public class Parse {
                             userList.add(user);
 
                         } else if (lineArr[2].equals("[]") && !lineArr[3].equals("[]")) {
+                            //if invisible isn't empty we need to parse it and update the user's invisible attribute
                             String[] invisible = lineArr[3].substring(1, lineArr.length - 2).split(",");
                             ArrayList<User> invisibleList = new ArrayList<>();
                             for (String i : invisible) {
@@ -53,6 +61,8 @@ public class Parse {
                             user.setInvisible(invisibleList);
                             userList.add(user);
                         } else  {
+                            //if invisible and blocking aren't empty we need to parse them and update the user's
+                            // invisible attribute and blocking attribute
                             String[] blocked = lineArr[2].substring(1, lineArr.length - 2).split(",");
                             String[] invisible = lineArr[3].substring(1, lineArr.length - 2).split(",");
 
@@ -87,10 +97,12 @@ public class Parse {
             while (sellerLine != null) {
                 String[] lineArr = sellerLine.split(",");
                 try {
+                    //if blocking lists and invisible lists are empty, we don't need to update them
                     if (lineArr[2].equals("[]") && lineArr[3].equals("[]")) {
                         User user = new User(lineArr[0], lineArr[1], true);
                         userList.add(user);
                     } else {
+                        //if blocking isn't empty, we need to parse it and update the user's blocking attribute
                         if (!lineArr[2].equals("[]") && lineArr[3].equals("[]")) {
                             String[] blocked = lineArr[2].substring(1, lineArr.length - 1).split(",");
                             ArrayList<User> blockedList = new ArrayList<>();
@@ -102,6 +114,7 @@ public class Parse {
                             userList.add(user);
 
                         } else if (lineArr[2].equals("[]") && !lineArr[3].equals("[]")) {
+                            //if invisible isn't empty we need to parse it and update the user's invisible attribute
                             String[] invisible = lineArr[3].substring(1, lineArr.length - 1).split(",");
                             ArrayList<User> invisibleList = new ArrayList<>();
                             for (String i : invisible) {
@@ -111,6 +124,8 @@ public class Parse {
                             user.setInvisible(invisibleList);
                             userList.add(user);
                         } else  {
+                            //if invisible and blocking aren't empty we need to parse them and update the user's
+                            // invisible attribute and blocking attribute
                             String[] blocked = lineArr[2].substring(1, lineArr.length - 1).split(",");
                             String[] invisible = lineArr[3].substring(1, lineArr.length - 1).split(",");
 
@@ -135,6 +150,7 @@ public class Parse {
                 sellerLine = sellerReader.readLine();
             }
 
+            //close readers
             customerReader.close();
             sellerReader.close();
         } catch (IOException e) {
@@ -144,6 +160,10 @@ public class Parse {
         return userList;
     }
 
+    /**
+     * get all the buisiness information from the StoresList.txt file
+     * @return HashMap of buisinesses
+     */
     public static HashMap<String, String[]> businesses() {
         HashMap<String, String[]> map = new HashMap<>();
 
@@ -156,9 +176,7 @@ public class Parse {
             // [seller]:[b1,b2,b3,b4]}
             while (line != null) {
                 String[] arr = line.split(":")[1].split(",");
-
                 map.put(line.split(":")[0], arr);
-
                 line = reader.readLine();
             }
 
@@ -168,6 +186,13 @@ public class Parse {
         }
     }
 
+    /**
+     * get a list of a specified user's messages
+     * @param email String
+     * @param senderIsSeller boolean
+     * @param recipientIsSeller boolean
+     * @return Arraylist of Messages
+     */
     public static ArrayList<Message> getMessages(String email, boolean senderIsSeller, boolean recipientIsSeller) {
         ArrayList<Message> messages = new ArrayList<>();
         File customerMessages = null;

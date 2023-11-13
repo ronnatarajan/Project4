@@ -31,7 +31,7 @@ public class UserTestCase {
 
         // sizeofblocked and blocked Test Cases
         buyer.block(seller);
-        if (buyer.sizeofblocked() == 1) {
+        if (buyer.sizeOfBlocked() == 1) {
             System.out.println("sizeofblocked and blocked Test Case Passed");
         } else {
             System.out.println("sizeofblocked and blocked Test Case Failed");

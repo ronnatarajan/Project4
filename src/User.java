@@ -26,9 +26,10 @@ public class User {
 
     /**
      * initialize User object
-     *
+     * initialize the arraylists
      * @param username String
      * @param password String
+     * @param seller boolean
      */
     public User(String username, String password, boolean seller) {
         this.username = username;
@@ -40,10 +41,12 @@ public class User {
 
 
 
-    public int sizeofblocked() {
-        return this.blocked.size();
-    }
-
+    /**
+     * initialize User object
+     * initialize arraylists
+     * @param username String
+     * @param seller boolean
+     */
     public User(String username, boolean seller) {
         this.username = username;
         this.seller = seller;
@@ -52,42 +55,71 @@ public class User {
 
     }
 
+    /**
+     * get number of people the current user has blocked
+     * @return int
+     */
+    public int sizeOfBlocked() {
+        return this.blocked.size();
+    }
+
 
     /**
      * getter for username
-     *
      * @return String
      */
     public String getUsername() {
         return username;
     }
 
+    /**
+     * setter for the blocked list
+     * @param blocked Arraylist<User>
+     */
     public void setBlocked(ArrayList<User> blocked) {
         this.blocked = blocked;
     }
 
+    /**
+     * setter for invisible list
+     * @param invisible Arraylist<User>
+     */
     public void setInvisible(ArrayList<User> invisible) {
         this.invisible = invisible;
     }
 
+    /**
+     * getter for the blocked list
+     * @return Arraylist<User>
+     */
     public ArrayList<User> getBlocked() {
         return blocked;
     }
 
+    /**
+     * getter for invisible list
+     * @return Arraylist<User>
+     */
     public ArrayList<User> getInvisible() {
         return invisible;
     }
 
     /**
      * getter for password
-     *
      * @return String
      */
     public String getPassword() {
         return password;
     }
 
+    /**
+     * returns true if the current object is allowed to view another
+     * returns false if the current object isn't allowed to view another
+     * @param user User
+     * @return boolean
+     */
     public boolean canSee(User user) {
+        //see if user's email appears in the invisible list
         for (User u : invisible) {
             if (u.getUsername().equals(user.getUsername())) {
                 return false;
@@ -95,6 +127,11 @@ public class User {
         }
         return true;
     }
+
+    /**
+     * make the current object invisible to a specified user
+     * @param user User
+     */
 
     public void makeInvisible(User user) {
         user.invisible.add(this);
@@ -123,7 +160,7 @@ public class User {
     }
 
     /**
-     * see if current user has blocked a passed in user
+     * see if current user has blocked another user
      * @param user User
      * @return true if current user has blocked another
      */
@@ -150,11 +187,11 @@ public class User {
         return Objects.equals(username, user.username) && Objects.equals(password, user.password);
     }
 
-    @Override
-    public int hashCode() {
-        return Objects.hash(username, password, seller, blocked);
-    }
-
+    /**
+     * toString for the current object
+     * includes username and password
+     * @return object as a string
+     */
     @Override
     public String toString() {
         return "User{" +
