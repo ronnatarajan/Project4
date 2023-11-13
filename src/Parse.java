@@ -63,9 +63,6 @@ public class Parse {
                         }
                     }
                 } catch(Exception e ) {
-                    System.out.println("-------------------");
-                    System.out.println(e.getMessage());
-                    System.out.println("-------------------");
 
                 }
                 customerLine = customerReader.readLine();

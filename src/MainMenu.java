@@ -119,6 +119,7 @@ public class MainMenu {
                                     if (users.size() < 2) {
                                         System.out.println("There's no one to message!");
                                     } else {
+                                        System.out.println(loggedIn.getUsername());
                                         if (loggedIn.isSeller()) {
                                             //seller implementation
                                             System.out.println("Pick one of the customers below to message");
@@ -127,7 +128,7 @@ public class MainMenu {
                                             StringBuilder p = new StringBuilder();
                                             p.append("{");
                                             for (User user : users) {
-                                                if (!user.isSeller() && !loggedIn.cannotSee(user)) {
+                                                if (!user.isSeller() && !loggedIn.cannotSee(user) && user != loggedIn) {
                                                     customers.add(user);
                                                     p.append(user.getUsername()).append(",");
 
@@ -189,9 +190,11 @@ public class MainMenu {
 
                                                 ArrayList<String> validSellers = new ArrayList<>();
                                                 for (User u : users) {
-                                                    for (String e : sellerEmails) {
-                                                        if (u.getUsername().equals(e) && !loggedIn.cannotSee(u)) {
-                                                            validSellers.add(e);
+                                                    if (u.isSeller()) {
+                                                        for (String e : sellerEmails) {
+                                                            if (u.getUsername().equals(e) && !loggedIn.cannotSee(u)) {
+                                                                validSellers.add(e);
+                                                            }
                                                         }
                                                     }
                                                 }
@@ -266,9 +269,11 @@ public class MainMenu {
 
                                                 ArrayList<String> validSellers = new ArrayList<>();
                                                 for (User u : users) {
-                                                    for (String e : sellerEmails) {
-                                                        if (u.getUsername().equals(e) && !loggedIn.cannotSee(u)) {
-                                                            validSellers.add(e);
+                                                    if (u.isSeller()) {
+                                                        for (String e : sellerEmails) {
+                                                            if (u.getUsername().equals(e) && !loggedIn.cannotSee(u)) {
+                                                                validSellers.add(e);
+                                                            }
                                                         }
                                                     }
                                                 }
@@ -346,12 +351,14 @@ public class MainMenu {
                                             if (lineArr[0].equals(loggedIn.getUsername())
                                                     && lineArr[1].equals(loggedIn.getPassword())) {
 
-                                                String blocked = String.valueOf(loggedIn.getBlocked());
-                                                lineArr[2] = blocked;
+                                                ArrayList<User> blockedList = loggedIn.getBlocked();
+                                                String[] blocked = new String[blockedList.size()];
 
-                                                String invisible = String.valueOf(loggedIn.getInvisible());
-                                                lineArr[3] = invisible;
-
+                                                for (int i = 0; i < blockedList.size(); i++) {
+                                                    blocked[i] = blockedList.get(i).getUsername();
+                                                }
+                                                String blockedStr = Arrays.toString(blocked);
+                                                lineArr[2] =  "[" + blockedStr + "]";
 
                                             }
                                             String backToString = Arrays.toString(lineArr);
@@ -546,6 +553,54 @@ public class MainMenu {
                                     }
                                     if (found) {
                                         System.out.println("You are now hidden!");
+
+                                        try {
+                                            File f = null;
+                                            if (loggedIn.isSeller()) {
+                                                f = new File("Database/Lists/SellerAccountsList.txt");
+                                            } else {
+                                                f = new File("Database/Lists/CustomerAccountsList.txt");
+                                            }
+                                            BufferedReader reader = new BufferedReader(new FileReader(f));
+
+                                            String line = reader.readLine();
+                                            ArrayList<String> lines = new ArrayList<>();
+
+                                            while (line != null) {
+                                                String[] lineArr = line.split(",");
+                                                if (lineArr[0].equals(loggedIn.getUsername())
+                                                        && lineArr[1].equals(loggedIn.getPassword())) {
+
+                                                    ArrayList<User> invisibleList = loggedIn.getInvisible();
+                                                    String[] invisible = new String[invisibleList.size()];
+
+                                                    for (int i = 0; i < invisibleList.size(); i++) {
+                                                        invisible[i] = invisibleList.get(i).getUsername();
+                                                    }
+                                                    String invisibleStr = Arrays.toString(invisible);
+                                                    lineArr[2] =  "[" + invisibleStr + "]";
+
+                                                }
+                                                String backToString = Arrays.toString(lineArr);
+                                                backToString.replaceAll(" ", "");
+                                                lines.add(backToString.substring(1, backToString.length() - 1));
+                                                line = reader.readLine();
+                                            }
+
+                                            PrintWriter writer = new PrintWriter(new BufferedWriter(new FileWriter(f,false)));
+                                            for (String l : lines) {
+                                                writer.println(l);
+                                            }
+
+                                            writer.flush();
+                                            writer.close();
+
+
+
+                                        } catch (Exception e) {
+                                            System.out.println("error reading files");
+                                        }
+
                                     } else {
                                         System.out.println("Please enter a valid user to hide from");
                                     }

@@ -1,1 +1,2 @@
-p:Google,Apple
+o:Google,Evil,Facebook
+l:Apple,Purdue,NFL
