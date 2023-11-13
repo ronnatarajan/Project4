@@ -17,7 +17,7 @@ import java.util.Date;
 
 public class SendMessages {
 
-    // Sends a message to a customer from a seller by appending the message to bother their respective text file
+
     /**
      * @param customerEmail
      * @param sellerEmail
@@ -42,7 +42,7 @@ public class SendMessages {
         appendMessage(sellerFileName, newMessage, sellerEmail, customerEmail);
     }
 
-    // Sends a message to a seller from a customer by appending the message to both their respective text file
+
     /**
      * @param customerEmail
      * @param sellerEmail
@@ -67,8 +67,6 @@ public class SendMessages {
 
     }
 
-
-    // handles appending the messages to sender and receiver's text files in the specified format
     /**
      * @param fileName
      * @param newMessage

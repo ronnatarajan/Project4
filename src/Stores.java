@@ -14,7 +14,6 @@ import java.util.ArrayList;
  */
 
 public class Stores {
-    // Writes a seller's created store and their email to the StoresList.txt file
     /**
      * @param stores
      * @param sellerEmail

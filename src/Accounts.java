@@ -15,14 +15,13 @@ import java.io.*;
 public class Accounts {
 
 
-    // checks if the passed in email and password arguments are within
-    // the file listing all created accounts, therefore verifying if an account exits
     /**
      * @param email
      * @param password
      * @param path
      * @return String
-     * Method verify an account exists in the file (specified by path)
+     * Method checks if the passed in email and password arguments are within
+     * the file listing all created accounts, therefore verifying if an account exits
      */
     public static String checkAccount(String email, String password, String path) {
 
@@ -58,13 +57,13 @@ public class Accounts {
     }
 
 
-    // adds a customer account to the Customer Accounts list and creates an individual file
-    // for the customer where its messages are stored
+
     /**
      * @param customerEmail
      * @param customerPassword
      * @return String
-     * Method to add a customer account to a CustomerAccountsList.txt
+     * Method to add a customer account to the Customer Accounts list and creates an individual file
+     * for the customer where its messages are stored
      */
     public static String addCustomerAccount(String customerEmail, String customerPassword) {
         // For a customer trying to sign up, checks to see if the account has already been created before
@@ -94,13 +93,12 @@ public class Accounts {
         return "Customer account can be created";
     }
 
-    // adds a seller account to Seller Accounts list and creates an individual file
-    // for the seller where its messages are stored
     /**
      * @param sellerEmail
      * @param sellerPassword
      * @return String
-     * Method to add a seller account to a SellerAccountsList.txt
+     * Method adds a seller account to Seller Accounts list and creates an individual file
+     * for the seller where its messages are stored
      */
     public static String addSellerAccount(String sellerEmail, String sellerPassword) {
         // For a seller trying to sign up, checks to see if the account has already been created before
