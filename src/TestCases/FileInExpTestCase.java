@@ -3,6 +3,16 @@ package src.TestCases;
 import src.FileInExp;
 import src.SendMessages;
 
+/**
+ * Project 4 -- Messaging System
+ *
+ *  CLASS DESCRIPTION
+ *
+ * @author NAME, lab sec 23
+ *
+ * @version November 13, 2023
+ */
+
 public class FileInExpTestCase {
     public static void main(String[] args) {
         // Test Data
@@ -28,6 +38,5 @@ public class FileInExpTestCase {
         boolean isSeller = false;
 //
 //        FileInExp.importMessage(to, from, isSeller);
-        //hello
     }
 }
