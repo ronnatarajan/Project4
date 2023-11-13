@@ -3,6 +3,16 @@ package src;
 import java.util.*;
 import java.io.*;
 
+/**
+ * Project 4 -- Messaging System
+ *
+ *  CLASS DESCRIPTION
+ *
+ * @author NAME, lab sec 23
+ *
+ * @version November 13, 2023
+ */
+
 public class EditDelete {
     // Method for deleting messages
     public static void deleteMessage(String user, boolean isSeller) {
