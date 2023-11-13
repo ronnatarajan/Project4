@@ -13,10 +13,6 @@ import java.io.*;
  */
 
 public class Accounts {
-
-
-    // checks if the passed in email and password arguments are within
-    // the file listing all created accounts, therefore verifying if an account exits
     public static String checkAccount(String email, String password, String path) {
 
         try {
