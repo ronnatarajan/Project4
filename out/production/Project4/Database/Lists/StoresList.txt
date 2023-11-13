@@ -1,2 +1,2 @@
-o:Google,Apple,Texas
-t:Disney,Pixar,Apple
+p:Google,Apple
+realtestseller:Store1,Store2

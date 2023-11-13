@@ -4,7 +4,6 @@ import java.io.*;
 import java.util.ArrayList;
 
 public class Stores {
-    // Unused Method
     public static void createStore(String sellerEmail, String storeName) {
 
         String fileName = "Database/Accounts/SellerAccounts/" + sellerEmail + "/Stores.txt";
@@ -13,9 +12,8 @@ public class Stores {
 
     }
 
-    // Writes a seller's created store and their email to the StoresList.txt file
     public static void appendStores(String stores, String sellerEmail) {
-        // Writes  store and email to the StoresList.txt in the proper format
+        // Appends to the StoresList.txt
         try {
             PrintWriter printWriter =
                     new PrintWriter(new BufferedWriter(new FileWriter("Database/Lists/StoresList.txt",true)));
@@ -32,7 +30,6 @@ public class Stores {
 
     }
 
-    // Unused Method
     public static ArrayList<String> allStoresList() {
         ArrayList<String> stores = new ArrayList<>();
 
@@ -64,7 +61,6 @@ public class Stores {
 
     }
 
-    // Unused Method
     public static ArrayList<String> sellerStoresList(String sellerEmail) {
         ArrayList<String> stores = new ArrayList<>();
 
