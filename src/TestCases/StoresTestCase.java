@@ -10,9 +10,9 @@ import java.io.IOException;
 /**
  * Project 4 -- Messaging System
  *
- *  CLASS DESCRIPTION
+ *  Test Case for Stores
  *
- * @author NAME, lab sec 23
+ * @author Kenjie DeCastro, lab sec 23
  *
  * @version November 13, 2023
  */

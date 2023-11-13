@@ -8,7 +8,7 @@ import java.util.Objects;
  *
  *  CLASS DESCRIPTION
  *
- * @author Ron Natarajan, lab sec 23
+ * @author NAME, lab sec 23
  *
  * @version November 13, 2023
  */

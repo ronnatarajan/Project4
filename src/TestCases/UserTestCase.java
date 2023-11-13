@@ -7,9 +7,9 @@ import java.util.ArrayList;
 /**
  * Project 4 -- Messaging System
  *
- *  CLASS DESCRIPTION
+ *  Test Case for User
  *
- * @author NAME, lab sec 23
+ * @author Kenjie DeCastro, lab sec 23
  *
  * @version November 13, 2023
  */

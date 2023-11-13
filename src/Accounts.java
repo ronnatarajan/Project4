@@ -5,14 +5,25 @@ import java.io.*;
 /**
  * Project 4 -- Messaging System
  *
- *  CLASS DESCRIPTION
+ *  Verifies exisiting accounts and adds new accounts
  *
- * @author NAME, lab sec 23
+ * @author Kenjie DeCastro, lab sec 23
  *
  * @version November 13, 2023
  */
 
 public class Accounts {
+
+
+    // checks if the passed in email and password arguments are within
+    // the file listing all created accounts, therefore verifying if an account exits
+    /**
+     * @param email
+     * @param password
+     * @param path
+     * @return String
+     * Method verify an account exists in the file (specified by path)
+     */
     public static String checkAccount(String email, String password, String path) {
 
         try {
@@ -49,6 +60,12 @@ public class Accounts {
 
     // adds a customer account to the Customer Accounts list and creates an individual file
     // for the customer where its messages are stored
+    /**
+     * @param customerEmail
+     * @param customerPassword
+     * @return String
+     * Method to add a customer account to a CustomerAccountsList.txt
+     */
     public static String addCustomerAccount(String customerEmail, String customerPassword) {
         // For a customer trying to sign up, checks to see if the account has already been created before
         System.out.println(checkAccount(customerEmail, customerPassword, "Database/Lists/CustomerAccountsList.txt"));
@@ -79,6 +96,12 @@ public class Accounts {
 
     // adds a seller account to Seller Accounts list and creates an individual file
     // for the seller where its messages are stored
+    /**
+     * @param sellerEmail
+     * @param sellerPassword
+     * @return String
+     * Method to add a seller account to a SellerAccountsList.txt
+     */
     public static String addSellerAccount(String sellerEmail, String sellerPassword) {
         // For a seller trying to sign up, checks to see if the account has already been created before
         if (checkAccount(sellerEmail, sellerPassword, "Database/Lists/SellerAccountsList.txt").equals("Found account")

@@ -8,9 +8,9 @@ import java.util.Date;
 /**
  * Project 4 -- Messaging System
  *
- *  CLASS DESCRIPTION
+ *  Sending messages between users and writes them to the files
  *
- * @author NAME, lab sec 23
+ * @author Kenjie DeCastro, lab sec 23
  *
  * @version November 13, 2023
  */
@@ -18,6 +18,13 @@ import java.util.Date;
 public class SendMessages {
 
     // Sends a message to a customer from a seller by appending the message to bother their respective text file
+    /**
+     * @param customerEmail
+     * @param sellerEmail
+     * @param newMessage
+     *
+     * Method Sends a message to a customer from a seller by appending the message to bother their respective text file
+     */
     public static void sellerSendsMessage(String customerEmail, String sellerEmail, String newMessage) {
         String fileName = "Accounts/" + customerEmail + ".txt";
 
@@ -36,6 +43,13 @@ public class SendMessages {
     }
 
     // Sends a message to a seller from a customer by appending the message to both their respective text file
+    /**
+     * @param customerEmail
+     * @param sellerEmail
+     * @param newMessage
+     *
+     * Sends a message to a seller from a customer by appending the message to both their respective text file
+     */
     public static void customerSendsMessage(String sellerEmail, String customerEmail, String newMessage) {
         String fileName = "Accounts/" + sellerEmail + ".txt";
 
@@ -55,6 +69,14 @@ public class SendMessages {
 
 
     // handles appending the messages to sender and receiver's text files in the specified format
+    /**
+     * @param fileName
+     * @param newMessage
+     * @param senderEmail
+     * @param recipientEmail
+     *
+     * Handles appending the messages to sender and receiver's text files in the specified format
+     */
     public static void appendMessage(String fileName, String newMessage, String senderEmail, String recipientEmail) {
         // creates a timestamp for the message
         Date currentDate = new Date();
