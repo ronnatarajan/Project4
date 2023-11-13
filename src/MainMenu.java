@@ -503,6 +503,7 @@ public class MainMenu {
                                         ArrayList<String> lines = new ArrayList<String>();
                                         while (checkLines.hasNextLine()) {
                                             totLines++;
+                                            checkLines.nextLine();
                                         }
                                         File f = new File("Database/Lists/UserSizes.txt");
                                         Scanner readLines = new Scanner(f);
