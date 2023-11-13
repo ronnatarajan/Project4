@@ -8,6 +8,7 @@ ____ - Submitted Vocareum Workspace
 
 ## Description of Each Class
 Accounts:
+This class...
 
 EditDelete:
 
