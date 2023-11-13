@@ -39,12 +39,6 @@ public class SendMessages {
     public static void customerSendsMessage(String sellerEmail, String customerEmail, String newMessage) {
         String fileName = "Accounts/" + sellerEmail + ".txt";
 
-        // Unused
-        int index = customerEmail.indexOf('@');
-        String customerName = customerEmail.substring(0, index);
-
-        File messageFile = new File(fileName);
-        // Unused
 
         // Call to append the message to the seller's file
         appendMessage(fileName, newMessage, customerEmail, sellerEmail);
@@ -53,9 +47,6 @@ public class SendMessages {
         // This is to append the message to the customer's message history file as well
         String customerFileName = "Accounts/" + customerEmail + ".txt";
 
-        // Unused
-        File customerMessageFile = new File(customerFileName);
-        // Unused
 
         // Call to append the message to the customer's file
         appendMessage(customerFileName, newMessage, customerEmail, sellerEmail);
