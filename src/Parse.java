@@ -1,6 +1,7 @@
 package src;
 
 import java.io.*;
+import java.sql.SQLOutput;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
@@ -83,7 +84,7 @@ public class Parse {
                         }
                     }
                 } catch(Exception e ) {
-                    
+                    System.out.print("");
                 }
                 customerLine = customerReader.readLine();
             }
@@ -145,7 +146,7 @@ public class Parse {
                         }
                     }
                 } catch(Exception e) {
-
+                    System.out.print("");
                 }
                 sellerLine = sellerReader.readLine();
             }
