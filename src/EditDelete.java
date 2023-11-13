@@ -90,6 +90,10 @@ public class EditDelete {
             // Prompts user for a message to edit
             System.out.println("Enter a message to add to edit (1 - " + totLines + ")");
             int messageNum = Integer.parseInt(input.nextLine());
+            if (!lines.get(messageNum - 1).split(",")[0].equals(user)) {
+                System.out.println("You Can Only Edit Messages You Send");
+                break;
+            }
             // Prompts user for the new message after edits
             System.out.println("Enter new message:");
             String newMessage = input.nextLine() + " - edited";
