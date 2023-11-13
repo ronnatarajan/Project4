@@ -120,7 +120,6 @@ public class MainMenu {
                     } catch (Exception e) {
                         System.out.println("Failed to check for new messages");
                     }
-                    System.out.println(users.size());
                     ArrayList<Message> userMessages = Parse.getMessages(email, loggedIn.isSeller(), !loggedIn.isSeller());
 
 
