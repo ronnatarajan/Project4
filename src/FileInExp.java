@@ -16,7 +16,11 @@ import java.io.*;
  */
 
 public class FileInExp {
-    // Method to export messages
+    // 
+    /**
+     * @param user
+     * Method to export messages
+     */
     public static void exportMessage(String user) {
         Scanner input = new Scanner(System.in);
         // Opens the users message data
@@ -60,7 +64,13 @@ public class FileInExp {
             System.out.println("Please Enter Correct Information");
         }
     }
-    // Method to import messages
+    // 
+    /**
+     * @param to
+     * @param from
+     * @param isSeller
+     * Method to import messages
+     */
     public static void importMessage(String to, String from, boolean isSeller) {
         Scanner input = new Scanner(System.in);
         // Prompts user for the input path
