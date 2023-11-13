@@ -5,6 +5,8 @@ To compile the project, simply run MainMenu.java and follow instructions prompte
 ### Submissions
 Ryan - Submitted report on Brightspace  
 Josh - Submitted Vocareum workspace
+### GitHub Link
+https://github.com/ronnatarajan/Project4.git
 ### Class Descriptions
 Accounts:
 <br/>- addCustomerAccount is a static method that writes a created customer account to CustomerAccountsList.txt.
