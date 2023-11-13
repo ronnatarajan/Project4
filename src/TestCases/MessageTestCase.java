@@ -4,6 +4,16 @@ import src.InvalidMessageException;
 import src.Message;
 import src.User;
 
+/**
+ * Project 4 -- Messaging System
+ *
+ *  CLASS DESCRIPTION
+ *
+ * @author NAME, lab sec 23
+ *
+ * @version November 13, 2023
+ */
+
 public class MessageTestCase {
 
     public static void main(String[] args) throws InvalidMessageException {
@@ -32,7 +42,7 @@ public class MessageTestCase {
         System.out.println("Buyer Cannot Message Another Buyer Test Case");
         System.out.println("If exception is thrown, test case passed");
         Message messageThree = new Message(newMessage, buyer, buyer2);
-//hello
+
 
 
 
