@@ -170,8 +170,8 @@ public class MainMenu {
 
 
                                                     SendMessages.sellerSendsMessage(
-                                                            message.getSender().getUsername(),
                                                             message.getRecipient().getUsername(),
+                                                            message.getSender().getUsername(),
                                                             message.getMessage()
                                                     );
 
