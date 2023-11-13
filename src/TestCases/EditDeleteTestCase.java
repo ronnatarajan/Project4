@@ -3,6 +3,16 @@ package src.TestCases;
 import src.EditDelete;
 import src.SendMessages;
 
+/**
+ * Project 4 -- Messaging System
+ *
+ *  CLASS DESCRIPTION
+ *
+ * @author NAME, lab sec 23
+ *
+ * @version November 13, 2023
+ */
+
 
 public class EditDeleteTestCase {
     public static void main(String[] args) {
@@ -28,6 +38,6 @@ public class EditDeleteTestCase {
         System.out.println("When finished remember to delete the test files:" +
                 "\n" + customerEmail + ".txt" +
                 "\n" + sellerEmail + ".txt");
-//hello
+
     }
 }
