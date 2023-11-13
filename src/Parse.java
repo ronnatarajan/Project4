@@ -83,7 +83,7 @@ public class Parse {
                         }
                     }
                 } catch(Exception e ) {
-
+                    
                 }
                 customerLine = customerReader.readLine();
             }

@@ -68,7 +68,6 @@ public class Accounts {
      */
     public static String addCustomerAccount(String customerEmail, String customerPassword) {
         // For a customer trying to sign up, checks to see if the account has already been created before
-        System.out.println(checkAccount(customerEmail, customerPassword, "Database/Lists/CustomerAccountsList.txt"));
         if (checkAccount(customerEmail, customerPassword, "Database/Lists/SellerAccountsList.txt").equals("Found account")
                 || checkAccount(customerEmail, customerPassword, "Database/Lists/CustomerAccountsList.txt").equals("Found account")) {
             System.out.println("Customer account already exists!");
