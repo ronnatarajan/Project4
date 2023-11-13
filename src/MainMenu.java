@@ -9,7 +9,7 @@ import java.util.*;
 /**
  * Project 4 -- Messaging System
  *
- *  CLASS DESCRIPTION
+ *  Integrates all the functionality of the classes and functions as a MainMenu
  *
  * @author NAME, lab sec 23
  *
@@ -791,13 +791,13 @@ public class MainMenu {
                             String addCustomerAccount = Accounts.addCustomerAccount(email, password);
                             //if the account already exists, just break out of sign up loop
                             if (addCustomerAccount.contains("Customer account already exists")) {
-                                MainMenu.main(null);
-                                break;
+                                System.out.println(farewellMessage);
+                                return;
                             } else {
                                 //prompts a thank you, then exists
                                 System.out.println(signUpThankYou);
-                                MainMenu.main(null);
-                                break;
+                                System.out.println(farewellMessage);
+                                return;
                             }
                         }
                         if (response.equals("s")) {
@@ -805,8 +805,8 @@ public class MainMenu {
                             String addSellerAccount = Accounts.addSellerAccount(email, password);
                             //if the account already exists, just break out of sign up loop
                             if (addSellerAccount.contains("Seller account already exists!")) {
-                                MainMenu.main(null);
-                                break;
+                                System.out.println(farewellMessage);
+                                return;
                             } else {
                                 //prompts the store owner what stores are under their name, seperated by a comma
                                 System.out.println(storesPrompt);
@@ -815,8 +815,8 @@ public class MainMenu {
 
                                 //prompts a thank you, then goes back to main menu
                                 System.out.println(signUpThankYou);
-                                MainMenu.main(null);
-                                break;
+                                System.out.println(farewellMessage);
+                                return;
                             }
                         }
                     }
