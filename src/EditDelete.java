@@ -36,6 +36,7 @@ public class EditDelete {
                     answer = input.nextLine().toLowerCase();
                 } else {
                     System.out.println("No Messages To Delete!");
+                    break;
                 }
             } while(answer.equals("y"));
 
@@ -130,6 +131,7 @@ public class EditDelete {
             answer = input.nextLine().toLowerCase();
         } else {
             System.out.println("No messages to edit!");
+            break;
         }
         } while(answer.equals("y"));
     } catch (Exception e) {

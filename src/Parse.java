@@ -79,16 +79,16 @@ public class Parse {
                 String[] lineArr = sellerLine.split(",");
                 try {
                     if (lineArr[2].equals("[]") && lineArr[3].equals("[]")) {
-                        User user = new User(lineArr[0], lineArr[1], false);
+                        User user = new User(lineArr[0], lineArr[1], true);
                         userList.add(user);
                     } else {
                         if (!lineArr[2].equals("[]") && lineArr[3].equals("[]")) {
                             String[] blocked = lineArr[2].substring(1, lineArr.length - 1).split(",");
                             ArrayList<User> blockedList = new ArrayList<>();
                             for (String i : blocked) {
-                                blockedList.add(new User(i, true));
+                                blockedList.add(new User(i, false));
                             }
-                            User user = new User(lineArr[0], lineArr[1], false);
+                            User user = new User(lineArr[0], lineArr[1], true);
                             user.setBlocked(blockedList);
                             userList.add(user);
 
@@ -96,9 +96,9 @@ public class Parse {
                             String[] invisible = lineArr[3].substring(1, lineArr.length - 1).split(",");
                             ArrayList<User> invisibleList = new ArrayList<>();
                             for (String i : invisible) {
-                                invisibleList.add(new User(i, true));
+                                invisibleList.add(new User(i, false));
                             }
-                            User user = new User(lineArr[0], lineArr[1], false);
+                            User user = new User(lineArr[0], lineArr[1], true);
                             user.setInvisible(invisibleList);
                             userList.add(user);
                         } else  {
@@ -109,12 +109,12 @@ public class Parse {
                             ArrayList<User> invisibleList = new ArrayList<>();
 
                             for (String i : blocked) {
-                                blockedList.add(new User(i, true));
+                                blockedList.add(new User(i, false));
                             }
                             for (String i : invisible) {
-                                invisibleList.add(new User(i, true));
+                                invisibleList.add(new User(i, false));
                             }
-                            User user = new User(lineArr[0], lineArr[1], false);
+                            User user = new User(lineArr[0], lineArr[1], true);
                             user.setBlocked(blockedList);
                             user.setInvisible(invisibleList);
                             userList.add(user);

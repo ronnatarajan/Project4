@@ -487,6 +487,7 @@ public class MainMenu {
                                     break;
                                 case 6:
                                     EditDelete.editMessage(loggedIn.getUsername(), loggedIn.isSeller());
+                                    userMessages = Parse.getMessages(email, loggedIn.isSeller(), !loggedIn.isSeller());
                                     break;
                                 case 7:
                                     EditDelete.deleteMessage(loggedIn.getUsername(), loggedIn.isSeller());
@@ -499,6 +500,7 @@ public class MainMenu {
                                         ArrayList<String> lines = new ArrayList<String>();
                                         while (checkLines.hasNextLine()) {
                                             totLines++;
+                                            checkLines.nextLine();
                                         }
                                         File f = new File("Database/Lists/UserSizes.txt");
                                         Scanner readLines = new Scanner(f);
