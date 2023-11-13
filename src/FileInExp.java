@@ -42,6 +42,7 @@ public class FileInExp {
             }
             String answer;
             do {
+                if (totLines > 0) {
                 // Main UI loop
                 System.out.println("Enter a message to add to export (1 - " + totLines + ")");
                 int messageNum = Integer.parseInt(input.nextLine());
@@ -49,6 +50,10 @@ public class FileInExp {
                 writer.write(lines.get(messageNum - 1) + "\n");
                 System.out.println("Add more messages to export? (y/n)");
                 answer = input.nextLine().toLowerCase();
+                } else {
+                    System.out.println("No Messages to Export!");
+                    break;
+                }
             } while(answer.equals("y"));
             writer.close();
         } catch (Exception e) {
