@@ -600,6 +600,7 @@ public class MainMenu {
                             } else {
                                 System.out.println(signUpThankYou);
                                 MainMenu.main(null);
+                                break;
                             }
                         }
                         if (response.equals("s")) {
@@ -612,6 +613,7 @@ public class MainMenu {
                                 Stores.appendStores(stores, email);
                                 System.out.println(signUpThankYou);
                                 MainMenu.main(null);
+                                break;
                             }
                         }
                     }
