@@ -4,11 +4,11 @@
 
 ## Submissions
 ____ - Submitted Report on Brightspace
-____ - Submitted Vocareum Workspace
+<br>____ - Submitted Vocareum Workspace
 
 ## Description of Each Class
 Accounts:
-This class...
+<br> dslkjdksfjl
 
 EditDelete:
 
