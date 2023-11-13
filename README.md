@@ -3,6 +3,8 @@
 ## Instructions
 
 ## Submissions
+____ - Submitted Report on Brightspace
+____ - Submitted Vocareum Workspace
 
 ## Description of Each Class
 Accounts:
