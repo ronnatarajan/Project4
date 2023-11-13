@@ -6,6 +6,16 @@ import java.io.*;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+/**
+ * Project 4 -- Messaging System
+ *
+ *  CLASS DESCRIPTION
+ *
+ * @author NAME, lab sec 23
+ *
+ * @version November 13, 2023
+ */
+
 public class SendMessagesTestCase {
     public static void main(String[] args) {
         // Test Data for customerSendsMessage
@@ -183,6 +193,6 @@ public class SendMessagesTestCase {
         System.out.println("They were: \n"
                 + sellerEmail + ".txt\n"
                 + customerEmail +".txt");
-//hello
+
     }
 }
