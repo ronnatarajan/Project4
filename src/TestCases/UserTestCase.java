@@ -76,6 +76,8 @@ public class UserTestCase {
         }
 
         // hasBlocked Test Case
+        invisibleAndBlocked.add(seller);
+        buyer.setBlocked(invisibleAndBlocked);
         if (buyer.hasBlocked(seller)) {
             System.out.println("hasBlocked Test Case Passed");
         } else {
