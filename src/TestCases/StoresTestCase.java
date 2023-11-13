@@ -59,5 +59,6 @@ public class StoresTestCase {
 
         System.out.println("\nRemember to delete the following lines in the StoresList.txt file and leave an extra empty line!" +
                 "\n" + sellerEmail + ":" + stores);
+        //hello
     }
 }
