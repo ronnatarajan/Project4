@@ -1,4 +1,6 @@
-package src;
+package src.TestCases;
+
+import src.Parse;
 
 import java.lang.reflect.Array;
 import java.util.Arrays;
@@ -7,7 +9,7 @@ import java.util.Map;
 
 public class ParseTestCase {
     public static void main(String[] args) {
-        // getUsers
+        // getUsers Test Case
         System.out.println("getUsers Test Case");
         System.out.println(Parse.getUsers().toString());
         System.out.println("Check if the list printed above contains the users " +
@@ -15,7 +17,7 @@ public class ParseTestCase {
         System.out.println("If so, the getUsers Test Case Passed");
 
 
-        // businesses
+        // businesses Test Case
         System.out.println("\nbusinesses Test Case");
         for (Map.Entry<String, String[]> entry : Parse.businesses().entrySet()) {
             System.out.println(entry.getKey() + ": " + Arrays.toString(entry.getValue()));
@@ -25,7 +27,7 @@ public class ParseTestCase {
         System.out.println("If so, the businesses Test Case passed");
 
 
-        // getMessages
+        // getMessages Test Case
         System.out.println("\ngetMessages Test Case");
         System.out.println("With a message sent in the main menu, input the parameters in the code below to see if" +
                 " the message is what is expected. If so, the getMessages Test Case passed.");

@@ -1,4 +1,6 @@
-package src;
+package src.TestCases;
+
+import src.Stores;
 
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
@@ -20,6 +22,7 @@ public class StoresTestCase {
         appendStoresTestCase(stores, sellerEmail);
     }
 
+    // appendStores Test Case
     public static void appendStoresTestCase(String stores, String sellerEmail) {
         System.out.println("appendStores Test Case");
 

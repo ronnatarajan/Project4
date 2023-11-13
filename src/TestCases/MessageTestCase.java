@@ -1,8 +1,13 @@
-package src;
+package src.TestCases;
+
+import src.InvalidMessageException;
+import src.Message;
+import src.User;
 
 public class MessageTestCase {
 
     public static void main(String[] args) throws InvalidMessageException {
+        // Test Data
         User buyer = new User("Harley123@gmail.com", "Awesome", false);
         User seller = new User("Apple@icloud.com", "Apple", true);
         User seller2 = new User("Google@gmail.com", "Google", true);
@@ -12,7 +17,7 @@ public class MessageTestCase {
 
         String newMessage = "Hello World";
 
-        // Message Blocked by recipient
+        // Message Blocked by recipient Test Case
         seller.block(buyer);
         System.out.println("Messages Blocked by recipient Test Case");
         System.out.println("If exception is thrown, test case passed");

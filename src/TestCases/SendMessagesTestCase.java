@@ -1,4 +1,6 @@
-package src;
+package src.TestCases;
+
+import src.SendMessages;
 
 import java.io.*;
 import java.text.SimpleDateFormat;
@@ -28,6 +30,7 @@ public class SendMessagesTestCase {
 
     }
 
+    // customerSendsMessageTestCase
     public static void customerSendsMessageTestCase(String sellerEmail, String customerEmail, String newMessage) {
         System.out.println("\ncustomerSendsMessage Test Case");
 
@@ -105,6 +108,7 @@ public class SendMessagesTestCase {
     }
 
 
+    // sellerSendsMessageTestCase
     public static void sellerSendsMessageTestCase(String customerEmail, String sellerEmail, String newMessage) {
         System.out.println("\nsellerSendsMessage Test Case");
 
@@ -181,12 +185,4 @@ public class SendMessagesTestCase {
                 + customerEmail +".txt");
 
     }
-
-
-
-
-
-
-
-
 }
